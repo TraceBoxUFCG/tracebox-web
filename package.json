@@ -19,7 +19,7 @@
     "clsx": "^2.1.1",
     "iconify-icon": "^2.1.0",
     "lucide-vue-next": "^0.426.0",
-    "pinia": "^2.1.7",
+    "pinia": "^2.2.1",
     "radix-vue": "^1.9.3",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",

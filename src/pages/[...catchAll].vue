@@ -1,5 +1,6 @@
 <script setup lang="ts">
-usePageStore().pageData.title = ''
+const pageStore = usePageStore()
+pageStore.title = ''
 </script>
 
 <template>
