@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <nav class="h-16 border-b bg-muted/40 flex flex-col gap-2 px-6 justify-center items-end">
+  <nav class="flex h-16 flex-col items-end justify-center gap-2 border-b bg-muted/40 px-6">
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar>

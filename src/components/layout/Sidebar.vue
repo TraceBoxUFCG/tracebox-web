@@ -33,21 +33,21 @@ const accountLinks = [
 
 <template>
   <aside
-    class="flex flex-col h-screen gap-2 border-r fixed bg-muted/40 lg:w-52 w-16 transition-[width]"
+    class="fixed flex h-screen w-16 flex-col gap-2 border-r bg-muted/40 transition-[width] lg:w-52"
   >
     <RouterLink
       to="/ "
-      class="flex h-16 items-center border-b px-2 lg:px-4 shrink-0 gap-1 justify-between"
+      class="flex h-16 shrink-0 items-center justify-between gap-1 border-b px-2 lg:px-4"
     >
       TraceBox
     </RouterLink>
 
-    <nav class="flex flex-col gap-2 justify-between h-full relative">
+    <nav class="relative flex h-full flex-col justify-between gap-2">
       <div>
         <SideBarLinks :links="links" />
       </div>
 
-      <div class="border-y text-center bg-background py-3">
+      <div class="border-y bg-background py-3 text-center">
         <SideBarLinks :links="accountLinks" />
       </div>
     </nav>
