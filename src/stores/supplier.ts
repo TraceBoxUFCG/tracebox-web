@@ -22,24 +22,22 @@ export const useSupplierStore = defineStore('supplier-store', {
         }
       }
 
-      const createdSupplier: Supplier = (await this.axios.post('/supplier', payload)).data
-
-      if (createdSupplier) {
+      try {
+        const createdSupplier: Supplier = (await this.axios.post('/supplier', payload)).data
         toast({
           title: 'Fornecedor criado com sucesso',
           description: `O Fornecedor ${createdSupplier.name} foi criado com sucesso`
         })
-      } else {
+        this.fill()
+
+        return createdSupplier
+      } catch {
         toast({
           title: 'Falha no cadastro do fornecedor',
-          description: `Não foi possivel criar o fornecedor ${supplierPayload.name}.`,
+          description: `Não foi possivel criar o fornecedor ${supplierPayload.business_name}.`,
           variant: 'destructive'
         })
       }
-
-      this.fill()
-
-      return createdSupplier
     }
   }
 })

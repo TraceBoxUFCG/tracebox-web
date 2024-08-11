@@ -18,7 +18,7 @@ defineProps<{
         <iconify-icon :icon="dialogTrigger.icon"></iconify-icon>{{ dialogTrigger.title }}</Button
       >
     </DialogTrigger>
-    <DialogContent class="max-h-[90dvh] grid-rows-[auto_minmax(0,1fr)_auto] p-6 sm:max-w-[700px]">
+    <DialogContent class="max-h-[90dvh] grid-rows-[auto_minmax(0,1fr)_auto] p-6 sm:max-w-[600px]">
       <DialogHeader class="p-6 pb-0">
         <DialogTitle>{{ dialogTitle }}</DialogTitle>
         <DialogDescription v-if="dialogDescription">

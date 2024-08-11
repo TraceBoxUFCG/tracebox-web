@@ -32,7 +32,7 @@ export default defineConfig({
         },
         {
           from: '@/types',
-          imports: ['Supplier', 'Address'],
+          imports: ['Supplier', 'Address', 'StatesEnum'],
           type: true
         }
       ],
