@@ -1,7 +1,6 @@
 export type Supplier = {
   document: string
   business_name: string
-  id: number
   address: Address
 }
 
@@ -12,9 +11,6 @@ export type Address = {
   zipcode: string
   number: string
   complement: string
-  latitude: number
-  longitude: number
-  id: number
 }
 
 export enum StatesEnum {

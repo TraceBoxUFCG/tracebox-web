@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.2",
     "@internationalized/date": "^3.5.5",
     "@tanstack/vue-table": "^8.20.3",
     "@vee-validate/zod": "^4.13.2",
@@ -23,13 +24,14 @@
     "eslint-plugin-tailwindcss": "^3.17.4",
     "iconify-icon": "^2.1.0",
     "lucide-vue-next": "^0.426.0",
+    "maska": "^3.0.0",
     "pinia": "^2.2.1",
     "radix-vue": "^1.9.3",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "unplugin-vue-router": "^0.10.2",
     "vee-validate": "^4.13.2",
-    "vue": "^3.4.29",
+    "vue": "link:@formkit/auto-animate/vue",
     "vue-router": "^4.3.3",
     "zod": "^3.23.8"
   },
