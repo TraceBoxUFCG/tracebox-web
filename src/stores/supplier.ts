@@ -1,5 +1,3 @@
-import type { Supplier } from '@/types/supplier'
-
 export const useSupplierStore = defineStore('supplier-store', {
   state: () => {
     return {

@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@internationalized/date": "^3.5.5",
     "@tanstack/vue-table": "^8.20.3",
     "@vee-validate/zod": "^4.13.2",
     "@vueuse/core": "^10.11.1",

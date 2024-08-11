@@ -6,6 +6,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const StatesEnum: typeof import('./src/types/supplier')['StatesEnum']
   const [alias]: typeof import('[package-name]')['[from]']
   const [import-names]: typeof import('[package-name]')['[import-names]'] 
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
@@ -61,6 +62,7 @@ declare global {
   const useCartStore: typeof import('./src/stores/supplier')['useCartStore']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
+  const useForm: typeof import('vee-validate')['useForm']
   const useLink: typeof import('vue-router')['useLink']
   const useMyFetch: typeof import('@vueuse/core')['useFetch']
   const usePageStore: typeof import('./src/stores/page')['usePageStore']
@@ -68,14 +70,23 @@ declare global {
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
   const useSupplierStore: typeof import('./src/stores/supplier')['useSupplierStore']
+  const vee-useForm: typeof import('vee-validate')['vee-useForm']
+  const vee-validate: typeof import('vee-validate')['vee-validate']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
   const watchSyncEffect: typeof import('vue')['watchSyncEffect']
+  const z: typeof import('zod')['z']
 }
 // for type re-export
 declare global {
   // @ts-ignore
   export type { Component, ComponentPublicInstance, ComputedRef, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, VNode, WritableComputedRef } from 'vue'
   import('vue')
+  // @ts-ignore
+  export type { Supplier, Address } from '@/types'
+  import('@/types')
+  // @ts-ignore
+  export type { StatesEnum } from './src/types/supplier'
+  import('./src/types/supplier')
 }
