@@ -5,7 +5,7 @@
     "src/**/*",
     "src/**/*.vue",
     "typed-router.d.ts",
-    "database/types.ts",
+    "src/types/supplier.ts",
     "auto-imports.d.ts",
     "components.d.ts"
   ],
