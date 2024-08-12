@@ -3,15 +3,18 @@ import { toast } from '@/components/ui/toast'
 export const useSupplierStore = defineStore('supplier-store', {
   state: () => {
     return {
-      suppliers: [] as Supplier[]
+      suppliers: [] as Supplier[],
+      suppliersResponse: {} as PaginatedResponse<Supplier>
     }
   },
 
   actions: {
     async fill() {
-      const supplier = (await this.axios.get('/supplier')).data.items
-      this.suppliers = supplier
+      const response: PaginatedResponse<Supplier> = (await this.axios.get('/supplier')).data
+      this.suppliers = response.items
+      this.suppliersResponse = response
     },
+
     async createSupplier(supplierPayload: Supplier) {
       const payload = {
         ...supplierPayload,

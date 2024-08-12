@@ -67,5 +67,9 @@ const columns: ColumnDef<Supplier>[] = [
 </script>
 
 <template>
-  <DataTable v-if="supplierStore.suppliers" :columns="columns" :data="supplierStore.suppliers" />
+  <FilterableDataTable
+    placeholder="Filtre os Fornecedores"
+    :columns="columns"
+    :data="supplierStore.suppliersResponse"
+  />
 </template>
