@@ -21,9 +21,20 @@ const onClickDelete = (supplier: Supplier) => {
     variant: 'destructive'
   })
 }
+
+async function onSubmit(values: Supplier) {
+  await supplierStore.createSupplier(values)
+}
 </script>
 
 <template>
   <SupplierDataTable :onClickDelete="onClickDelete" :onClickUpdate="onClickUpdate">
+    <FormDialog
+      dialog-title="Cadastro de Fornecedores"
+      dialog-description="Preencha os dados para cadastrar e depois aperte o botão de salvar"
+      :dialog-trigger="{ title: 'Novo Fornecedor', icon: 'lucide:plus' }"
+    >
+      <SupplierForm :onSubmit="onSubmit" />
+    </FormDialog>
   </SupplierDataTable>
 </template>

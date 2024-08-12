@@ -68,7 +68,7 @@ declare module 'vue' {
     FilterableDataTable: typeof import('./src/components/ui/filterable-datatable/FilterableDataTable.vue')['default']
     FormControl: typeof import('./src/components/ui/form/FormControl.vue')['default']
     FormDescription: typeof import('./src/components/ui/form/FormDescription.vue')['default']
-    FormDialog: typeof import('./src/components/FormDialog.vue')['default']
+    FormDialog: typeof import('./src/components/ui/form-dialog/FormDialog.vue')['default']
     FormItem: typeof import('./src/components/ui/form/FormItem.vue')['default']
     FormLabel: typeof import('./src/components/ui/form/FormLabel.vue')['default']
     FormMessage: typeof import('./src/components/ui/form/FormMessage.vue')['default']

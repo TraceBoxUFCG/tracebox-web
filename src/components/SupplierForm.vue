@@ -2,26 +2,24 @@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { StatesEnum } from '@/types/supplier'
 
+defineProps<{
+  onSubmit: (object: Supplier) => void
+}>()
 const stepIndex = ref(1)
 
 const formSchema = [
   z.object({
-    document: z.string().describe('CPF/CNPJ'),
-    business_name: z.string().describe('Nome')
+    document: z.string(),
+    business_name: z.string()
   }),
-  z
-    .object({
-      zipcode: z
-        .string()
-        .regex(/^\d{5}-\d{3}$/, 'CEP inválido. O formato deve ser XXXXX-XXX.')
-        .describe('CEP'),
-      city: z.string().describe('Cidade'),
-      state: z.nativeEnum(StatesEnum).describe('Estado'),
-      street: z.string().describe('Rua'),
-      number: z.string().describe('Número'),
-      complement: z.string().describe('Complemento').optional()
-    })
-    .describe('Endereço')
+  z.object({
+    zipcode: z.string().regex(/^\d{5}-\d{3}$/, 'CEP inválido. O formato deve ser XXXXX-XXX.'),
+    city: z.string(),
+    state: z.nativeEnum(StatesEnum),
+    street: z.string(),
+    number: z.string(),
+    complement: z.string().describe('Complemento').optional()
+  })
 ]
 
 const steps = [
@@ -44,11 +42,7 @@ const steps = [
       :form-schema="formSchema"
       :steps="steps"
       v-model:step-index="stepIndex"
-      :on-submit="
-        () => {
-          console.log('Submited')
-        }
-      "
+      :on-submit="onSubmit"
     >
       <template v-if="stepIndex === 1">
         <FormField v-slot="{ componentField }" name="document">

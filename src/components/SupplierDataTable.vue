@@ -71,5 +71,7 @@ const columns: ColumnDef<Supplier>[] = [
     placeholder="Filtre os Fornecedores"
     :columns="columns"
     :data="supplierStore.suppliersResponse"
-  />
+  >
+    <slot />
+  </FilterableDataTable>
 </template>
