@@ -15,6 +15,19 @@ export const useSupplierStore = defineStore('supplier-store', {
       this.suppliersResponse = response
     },
 
+    async search(q: string, page: number) {
+      const response: PaginatedResponse<Supplier> = (
+        await this.axios.get('/supplier', {
+          params: {
+            q: q,
+            page: page
+          }
+        })
+      ).data
+      this.suppliers = response.items
+      this.suppliersResponse = response
+    },
+
     async createSupplier(supplierPayload: Supplier) {
       const payload = {
         ...supplierPayload,

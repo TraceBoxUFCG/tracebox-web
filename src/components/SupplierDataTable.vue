@@ -64,10 +64,15 @@ const columns: ColumnDef<Supplier>[] = [
     }
   }
 ]
+
+const onSearch = async (input: string, page: number) => {
+  await supplierStore.search(input, page)
+}
 </script>
 
 <template>
   <FilterableDataTable
+    :on-search="onSearch"
     placeholder="Filtre os Fornecedores"
     :columns="columns"
     :data="supplierStore.suppliersResponse"

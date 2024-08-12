@@ -1,18 +1,39 @@
 <script setup lang="ts" generic="TData, TValue">
 import type { ColumnDef } from '@tanstack/vue-table'
-import { Pagination, PaginationList } from '@/components/ui/pagination'
+import { Pagination, PaginationList, PaginationListItem } from '@/components/ui/pagination'
+
+import { debounce } from 'lodash'
 
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
   data: PaginatedResponse
   placeholder?: string
+  onSearch: (input: string, page: number) => void
 }>()
+
+const searchInput = ref('')
+const currentPage = ref(1)
+
+const search = debounce(() => {
+  props.onSearch(searchInput.value, currentPage.value)
+}, 1000)
 </script>
 
 <template>
   <div class="flex flex-col gap-5 px-5">
     <div class="flex items-center justify-between">
-      <Input model-value="" class="max-w-sm" :placeholder="placeholder" />
+      <Input
+        :onchange="search"
+        :model-value="searchInput"
+        @update:model-value="
+          (input) => {
+            searchInput = String(input)
+            search()
+          }
+        "
+        class="max-w-sm"
+        :placeholder="placeholder"
+      />
       <slot />
     </div>
     <div class="flex w-full flex-col items-center justify-center gap-5">
@@ -27,7 +48,7 @@ const props = defineProps<{
         :total="props.data.total"
         :sibling-count="1"
         show-edges
-        :default-page="1"
+        :default-page="currentPage"
         class="flex w-full items-center justify-center"
       >
         <PaginationList v-slot="{ items }" class="flex items-center gap-1">
@@ -41,15 +62,44 @@ const props = defineProps<{
               :value="item.value"
               as-child
             >
-              <Button class="size-10 p-0" :variant="item.value === page ? 'default' : 'outline'">
+              <Button
+                :onclick="
+                  () => {
+                    if (currentPage !== item.value) {
+                      currentPage = item.value
+                      search()
+                    }
+                  }
+                "
+                class="size-10 p-0"
+                :variant="item.value === page ? 'default' : 'outline'"
+              >
                 {{ item.value }}
               </Button>
             </PaginationListItem>
             <PaginationEllipsis v-else :key="item.type" :index="index" />
           </template>
 
-          <PaginationNext />
-          <PaginationLast />
+          <PaginationNext
+            :onclick="
+              () => {
+                if (items.length < currentPage) {
+                  currentPage = currentPage + 1
+                  search()
+                }
+              }
+            "
+          />
+          <PaginationLast
+            :onclick="
+              () => {
+                if (items.length > 1) {
+                  currentPage = currentPage + 1
+                  search()
+                }
+              }
+            "
+          />
         </PaginationList>
       </Pagination>
     </div>
