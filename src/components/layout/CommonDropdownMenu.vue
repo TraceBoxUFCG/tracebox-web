@@ -1,11 +1,9 @@
 <script setup lang="ts">
 defineProps<{
-  id: string
+  id: number
+  onClickUpdate: (object: any) => void
+  onClickDelete: (object: any) => void
 }>()
-
-function copy(id: string) {
-  navigator.clipboard.writeText(id)
-}
 </script>
 
 <template>
@@ -18,9 +16,12 @@ function copy(id: string) {
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end">
       <DropdownMenuLabel>Ações</DropdownMenuLabel>
-      <DropdownMenuItem @click="copy(id)"> Editar </DropdownMenuItem>
+      <DropdownMenuItem @click="onClickUpdate"> Editar </DropdownMenuItem>
       <DropdownMenuSeparator />
-      <DropdownMenuItem class="text-destructive hover:bg-destructive-foreground">
+      <DropdownMenuItem
+        @click="onClickDelete"
+        class="text-destructive hover:bg-destructive-foreground"
+      >
         <iconify-icon class="size-4" icon="lucide:trash" />
         Deletar
       </DropdownMenuItem>
