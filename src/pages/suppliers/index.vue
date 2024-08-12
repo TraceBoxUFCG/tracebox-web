@@ -39,7 +39,7 @@ const columns: ColumnDef<Supplier>[] = [
     }
   },
   {
-    accessorKey: 'Documento',
+    accessorKey: 'Cidade',
     header: () => h('div', { class: 'text-left' }, 'Cidade'),
     cell: ({ row }) => {
       return h('div', { to: '', class: 'text-left font-medium' }, row.original.address.city)
