@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CommonDropdownMenu from '@/components/layout/CommonDropdownMenu.vue'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
 
@@ -42,6 +43,21 @@ const columns: ColumnDef<Supplier>[] = [
     header: () => h('div', { class: 'text-left' }, 'Cidade'),
     cell: ({ row }) => {
       return h('div', { to: '', class: 'text-left font-medium' }, row.original.address.city)
+    }
+  },
+  {
+    id: 'actions',
+    enableHiding: false,
+    cell: ({ row }) => {
+      const supplier = row.original
+
+      return h(
+        'div',
+        { class: 'relative' },
+        h(CommonDropdownMenu, {
+          id: supplier.id
+        })
+      )
     }
   }
 ]
