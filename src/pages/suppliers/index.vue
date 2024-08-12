@@ -8,18 +8,15 @@ const supplier = ref<Supplier>(null)
 const supplierStore = useSupplierStore()
 supplierStore.fill()
 
-const onClickUpdate = (s: Supplier) => {
+const onClickUpdate = async (s: Supplier) => {
   supplier.value = s
   toast({
     title: `Update Supplier ${s.id}`
   })
 }
 
-const onClickDelete = (supplier: Supplier) => {
-  toast({
-    title: `Delete Supplier ${supplier.id}`,
-    variant: 'destructive'
-  })
+const onClickDelete = async (supplier: Supplier) => {
+  await supplierStore.delete(supplier)
 }
 
 async function onSubmit(values: Supplier) {

@@ -28,6 +28,18 @@ export const useSupplierStore = defineStore('supplier-store', {
       this.suppliersResponse = response
     },
 
+    async delete(supplier: Supplier) {
+      try {
+        await this.axios.delete(`/supplier/${supplier.id}`)
+      } catch {
+        toast({
+          title: 'Falha na tentativa de deletar fornecedor.',
+          description: `Não foi possivel deletar o fornecedor ${supplier.business_name}.`,
+          variant: 'destructive'
+        })
+      }
+    },
+
     async createSupplier(supplierPayload: Supplier) {
       const payload = {
         ...supplierPayload,
