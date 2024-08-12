@@ -100,7 +100,7 @@ declare module 'vue' {
     Separator: typeof import('./src/components/ui/separator/Separator.vue')['default']
     Sidebar: typeof import('./src/components/layout/Sidebar.vue')['default']
     SideBarLinks: typeof import('./src/components/layout/SideBarLinks.vue')['default']
-    SteppedForm: typeof import('./src/components/SteppedForm.vue')['default']
+    SteppedForm: typeof import('./src/components/ui/stepped-form/SteppedForm.vue')['default']
     Stepper: typeof import('./src/components/ui/stepper/Stepper.vue')['default']
     StepperDescription: typeof import('./src/components/ui/stepper/StepperDescription.vue')['default']
     StepperIndicator: typeof import('./src/components/ui/stepper/StepperIndicator.vue')['default']
