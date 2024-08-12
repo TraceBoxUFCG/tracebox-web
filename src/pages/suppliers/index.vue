@@ -24,5 +24,6 @@ const onClickDelete = (supplier: Supplier) => {
 </script>
 
 <template>
-  <SupplierDataTable :onClickDelete="onClickDelete" :onClickUpdate="onClickUpdate" />
+  <SupplierDataTable :onClickDelete="onClickDelete" :onClickUpdate="onClickUpdate">
+  </SupplierDataTable>
 </template>
