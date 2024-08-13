@@ -9,6 +9,11 @@ const links = [
     title: 'Fornecedores',
     to: '/suppliers',
     icon: 'lucide:users-round'
+  },
+  {
+    title: 'Catálogo',
+    to: '/catalog',
+    icon: 'lucide:apple'
   }
 ]
 

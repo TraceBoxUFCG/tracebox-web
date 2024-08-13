@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { StatesEnum } from '@/types/supplier'
+import { StatesEnum } from '@/types/common'
 
 defineProps<{
   onSubmit: (object: Supplier) => void
