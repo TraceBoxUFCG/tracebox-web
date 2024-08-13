@@ -16,14 +16,20 @@ defineProps<{
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end">
       <DropdownMenuLabel>Ações</DropdownMenuLabel>
-      <DropdownMenuItem @click="onClickUpdate"> Editar </DropdownMenuItem>
       <DropdownMenuSeparator />
       <DropdownMenuItem
         @click="onClickDelete"
-        class="text-destructive hover:bg-destructive-foreground"
+        class="w-full text-destructive hover:bg-destructive-foreground"
+        as-child
       >
-        <iconify-icon class="size-4" icon="lucide:trash" />
-        Deletar
+        <ConfirmDeleteDialog
+          title="Você deseja deletar a entidade?"
+          description="Essa é uma ação destrutiva e não existe retorno."
+          :on-delete="onClickDelete"
+        >
+          <iconify-icon class="size-4" icon="lucide:trash" />
+          Deletar
+        </ConfirmDeleteDialog>
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>

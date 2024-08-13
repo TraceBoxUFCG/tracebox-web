@@ -50,6 +50,7 @@ declare module 'vue' {
     CalendarPrevButton: typeof import('./src/components/ui/calendar/CalendarPrevButton.vue')['default']
     Checkbox: typeof import('./src/components/ui/checkbox/Checkbox.vue')['default']
     CommonDropdownMenu: typeof import('./src/components/layout/CommonDropdownMenu.vue')['default']
+    ConfirmDeleteDialog: typeof import('./src/components/layout/ConfirmDeleteDialog.vue')['default']
     DataTable: typeof import('./src/components/ui/data-table/DataTable.vue')['default']
     Dialog: typeof import('./src/components/ui/dialog/Dialog.vue')['default']
     DialogClose: typeof import('./src/components/ui/dialog/DialogClose.vue')['default']
