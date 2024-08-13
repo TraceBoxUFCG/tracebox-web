@@ -29,7 +29,7 @@ async function onSubmit(values: Product) {
       dialog-description="Preencha os dados para cadastrar e depois aperte o botão de salvar"
       :dialog-trigger="{ title: 'Novo Produto', icon: 'lucide:plus' }"
     >
-      <SupplierForm :onSubmit="onSubmit" />
+      <ProductForm :onSubmit="onSubmit" />
     </FormDialog>
   </ProductDataTable>
 </template>
