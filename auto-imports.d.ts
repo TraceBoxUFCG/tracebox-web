@@ -6,7 +6,8 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
-  const StatesEnum: typeof import('./src/types/supplier')['StatesEnum']
+  const StatesEnum: typeof import('./src/types/common')['StatesEnum']
+  const UnitEnum: typeof import('./src/types/common')['UnitEnum']
   const [alias]: typeof import('[package-name]')['[from]']
   const [import-names]: typeof import('[package-name]')['[import-names]'] 
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
@@ -68,6 +69,7 @@ declare global {
   const useLink: typeof import('vue-router')['useLink']
   const useMyFetch: typeof import('@vueuse/core')['useFetch']
   const usePageStore: typeof import('./src/stores/page')['usePageStore']
+  const useProductStore: typeof import('./src/stores/product')['useProductStore']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
@@ -86,9 +88,9 @@ declare global {
   export type { Component, ComponentPublicInstance, ComputedRef, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { Supplier, Address, PaginatedResponse } from '@/types'
+  export type { Supplier, Address, PaginatedResponse, Product, Packaging } from '@/types'
   import('@/types')
   // @ts-ignore
-  export type { StatesEnum } from './src/types/supplier'
-  import('./src/types/supplier')
+  export type { UnitEnum, StatesEnum } from './src/types/common'
+  import('./src/types/common')
 }
