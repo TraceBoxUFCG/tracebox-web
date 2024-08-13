@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import type { Supplier } from '@/types/supplier'
+import CommonDropdownMenu from '@/components/layout/CommonDropdownMenu.vue'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
 
 const supplierStore = useSupplierStore()
+
+const props = defineProps<{
+  onClickUpdate: (object: any) => void
+  onClickDelete: (object: any) => void
+}>()
 
 const columns: ColumnDef<Supplier>[] = [
   {
@@ -35,15 +40,43 @@ const columns: ColumnDef<Supplier>[] = [
     }
   },
   {
-    accessorKey: 'Documento',
+    accessorKey: 'Cidade',
     header: () => h('div', { class: 'text-left' }, 'Cidade'),
     cell: ({ row }) => {
       return h('div', { to: '', class: 'text-left font-medium' }, row.original.address.city)
     }
+  },
+  {
+    id: 'actions',
+    enableHiding: false,
+    cell: ({ row }) => {
+      const supplier = row.original
+
+      return h(
+        'div',
+        { class: 'relative' },
+        h(CommonDropdownMenu, {
+          id: supplier.id,
+          onClickUpdate: () => props.onClickUpdate(supplier),
+          onClickDelete: () => props.onClickDelete(supplier)
+        })
+      )
+    }
   }
 ]
+
+const onSearch = async (input: string, page: number) => {
+  await supplierStore.search(input, page)
+}
 </script>
 
 <template>
-  <DataTable v-if="supplierStore.suppliers" :columns="columns" :data="supplierStore.suppliers" />
+  <FilterableDataTable
+    :on-search="onSearch"
+    placeholder="Filtre os Fornecedores"
+    :columns="columns"
+    :data="supplierStore.suppliersResponse"
+  >
+    <slot />
+  </FilterableDataTable>
 </template>

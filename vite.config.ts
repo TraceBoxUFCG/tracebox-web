@@ -26,6 +26,14 @@ export default defineConfig({
         VueRouterAutoImports,
         {
           pinia: ['defineStore', 'storeToRefs', 'acceptHMRUpdate']
+        },
+        {
+          zod: ['z']
+        },
+        {
+          from: '@/types',
+          imports: ['Supplier', 'Address', 'StatesEnum', 'PaginatedResponse'],
+          type: true
         }
       ],
       dts: true,

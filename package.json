@@ -13,21 +13,29 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.2",
+    "@internationalized/date": "^3.5.5",
     "@tanstack/vue-table": "^8.20.3",
+    "@types/lodash": "^4.17.7",
+    "@vee-validate/zod": "^4.13.2",
     "@vueuse/core": "^10.11.1",
     "axios": "^1.7.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "iconify-icon": "^2.1.0",
+    "lodash": "^4.17.21",
     "lucide-vue-next": "^0.426.0",
+    "maska": "^3.0.0",
     "pinia": "^2.2.1",
     "radix-vue": "^1.9.3",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "unplugin-vue-router": "^0.10.2",
-    "vue": "^3.4.29",
-    "vue-router": "^4.3.3"
+    "vee-validate": "^4.13.2",
+    "vue": "link:@formkit/auto-animate/vue",
+    "vue-router": "^4.3.3",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
