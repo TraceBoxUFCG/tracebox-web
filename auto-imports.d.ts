@@ -91,7 +91,7 @@ declare global {
   export type { Component, ComponentPublicInstance, ComputedRef, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { Supplier, Address, PaginatedResponse, Product, Packaging, Asset } from '@/types'
+  export type { Supplier, Address, PaginatedResponse, Product, Packaging, Asset, GenerateAssetTagPayload } from '@/types'
   import('@/types')
   // @ts-ignore
   export type { AssetStatusEnum } from './src/types/assets'

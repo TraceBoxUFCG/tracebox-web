@@ -24,6 +24,21 @@ export const useAssetStore = defineStore('asset-store', {
       ).data
       this.assets = response.items
       this.assetsResponse = response
+    },
+    async generateAssetsTags(payload: GenerateAssetTagPayload) {
+      const response = await this.axios.post('/stock/asset/generate_tags/', payload, {
+        responseType: 'blob'
+      })
+      // Criar um link temporário para baixar o arquivo
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', 'tags.pdf')
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+
+      await this.fill()
     }
   }
 })

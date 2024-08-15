@@ -11,3 +11,7 @@ export type Asset = {
   status: AssetStatusEnum
   packaging?: Packaging
 }
+
+export type GenerateAssetTagPayload = {
+  quantity: number
+}

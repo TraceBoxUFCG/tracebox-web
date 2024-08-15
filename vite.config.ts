@@ -32,7 +32,15 @@ export default defineConfig({
         },
         {
           from: '@/types',
-          imports: ['Supplier', 'Address', 'PaginatedResponse', 'Product', 'Packaging', 'Asset'],
+          imports: [
+            'Supplier',
+            'Address',
+            'PaginatedResponse',
+            'Product',
+            'Packaging',
+            'Asset',
+            'GenerateAssetTagPayload'
+          ],
           type: true
         }
       ],

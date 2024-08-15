@@ -9,11 +9,11 @@ assetStore.fill()
 <template>
   <AssetDataTable>
     <FormDialog
-      dialog-title="Cadastro de Produtos"
-      dialog-description="Preencha os dados para cadastrar e depois aperte o botão de salvar"
-      :dialog-trigger="{ title: 'Novo Produto', icon: 'lucide:plus' }"
+      dialog-title="Geração de Assets"
+      dialog-description="Preencha a quantidade de assets deseja gerar e depois aperte o botão de salvar"
+      :dialog-trigger="{ title: 'Gerar Assets', icon: 'lucide:plus' }"
     >
-      <ProductForm :onSubmit="() => {}" />
+      <AssetTagGenerateForm :onSubmit="assetStore.generateAssetsTags" />
     </FormDialog>
   </AssetDataTable>
 </template>
