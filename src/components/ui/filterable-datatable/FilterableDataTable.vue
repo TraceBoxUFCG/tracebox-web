@@ -14,21 +14,25 @@ const props = defineProps<{
 const searchInput = ref('')
 const currentPage = ref(1)
 
-const search = debounce(() => {
+const searchWithDebounce = debounce(() => {
   props.onSearch(searchInput.value, currentPage.value)
 }, 1000)
+
+const searchWithoutDebouce = () => {
+  props.onSearch(searchInput.value, currentPage.value)
+}
 </script>
 
 <template>
   <div class="flex flex-col gap-5 px-5">
     <div class="flex items-center justify-between">
       <Input
-        :onchange="search"
+        :onchange="searchWithDebounce"
         :model-value="searchInput"
         @update:model-value="
           (input) => {
             searchInput = String(input)
-            search()
+            searchWithDebounce()
           }
         "
         class="max-w-sm"
@@ -67,7 +71,7 @@ const search = debounce(() => {
                   () => {
                     if (currentPage !== item.value) {
                       currentPage = item.value
-                      search()
+                      searchWithoutDebouce()
                     }
                   }
                 "
@@ -85,7 +89,7 @@ const search = debounce(() => {
               () => {
                 if (items.length < currentPage) {
                   currentPage = currentPage + 1
-                  search()
+                  searchWithoutDebouce()
                 }
               }
             "
@@ -95,7 +99,7 @@ const search = debounce(() => {
               () => {
                 if (items.length > 1) {
                   currentPage = currentPage + 1
-                  search()
+                  searchWithoutDebouce()
                 }
               }
             "
