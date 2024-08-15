@@ -32,14 +32,7 @@ export default defineConfig({
         },
         {
           from: '@/types',
-          imports: [
-            'Supplier',
-            'Address',
-            'StatesEnum',
-            'PaginatedResponse',
-            'Product',
-            'Packaging'
-          ],
+          imports: ['Supplier', 'Address', 'PaginatedResponse', 'Product', 'Packaging', 'Asset'],
           type: true
         }
       ],
