@@ -9,6 +9,6 @@ export enum AssetStatusEnum {
 
 export type Asset = {
   id?: number
-  status: StatesEnum
+  status: AssetStatusEnum
   packaging?: Packaging
 }

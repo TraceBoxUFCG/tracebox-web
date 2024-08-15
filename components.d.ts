@@ -21,6 +21,7 @@ declare module 'vue' {
     AlertDialogTitle: typeof import('./src/components/ui/alert-dialog/AlertDialogTitle.vue')['default']
     AlertDialogTrigger: typeof import('./src/components/ui/alert-dialog/AlertDialogTrigger.vue')['default']
     AssetDataTable: typeof import('./src/components/AssetDataTable.vue')['default']
+    AssetDropDownMenu: typeof import('./src/components/layout/AssetDropDownMenu.vue')['default']
     AuthLayout: typeof import('./src/components/layout/main/AuthLayout.vue')['default']
     AutoForm: typeof import('./src/components/ui/auto-form/AutoForm.vue')['default']
     AutoFormField: typeof import('./src/components/ui/auto-form/AutoFormField.vue')['default']

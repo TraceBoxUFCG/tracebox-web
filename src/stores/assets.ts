@@ -14,7 +14,7 @@ export const useAssetStore = defineStore('asset-store', {
     },
 
     async search(q: string, page: number) {
-      const response: PaginatedResponse<Product> = (
+      const response: PaginatedResponse<Asset> = (
         await this.axios.get('/stock/asset', {
           params: {
             q: q,
