@@ -1,4 +1,3 @@
-import type { StatesEnum } from './common'
 import type { Packaging } from './product'
 
 export enum AssetStatusEnum {
