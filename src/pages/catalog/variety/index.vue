@@ -2,12 +2,12 @@
 const pageStore = usePageStore()
 pageStore.title = 'Variedade de Produtos'
 
-const assetStore = useAssetStore()
-assetStore.fill()
+const productVarietyStore = useProductVarietyStore()
+productVarietyStore.fill()
 </script>
 
 <template>
-  <AssetDataTable>
+  <ProductVarietyDataTable @click-delete="() => {}">
     <FormDialog
       dialog-title="Importação de Variedades"
       dialog-description="Faça o upload do arquivo .csv para upload das variedades. O arquivo deve seguir o seguinte padrão: product_id,name"
@@ -15,5 +15,5 @@ assetStore.fill()
     >
       <ProductVarietyImportForm />
     </FormDialog>
-  </AssetDataTable>
+  </ProductVarietyDataTable>
 </template>

@@ -39,7 +39,8 @@ export default defineConfig({
             'Product',
             'Packaging',
             'Asset',
-            'GenerateAssetTagPayload'
+            'GenerateAssetTagPayload',
+            'ProductVariety'
           ],
           type: true
         }

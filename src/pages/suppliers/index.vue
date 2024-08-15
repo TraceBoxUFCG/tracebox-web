@@ -1,31 +1,21 @@
 <script setup lang="ts">
-import { toast } from '@/components/ui/toast'
 const pageStore = usePageStore()
 pageStore.title = 'Fornecedores'
 
-const supplier = ref<Supplier>(null)
-
 const supplierStore = useSupplierStore()
 supplierStore.fill()
-
-const onClickUpdate = async (s: Supplier) => {
-  supplier.value = s
-  toast({
-    title: `Update Supplier ${s.id}`
-  })
-}
 
 const onClickDelete = async (supplier: Supplier) => {
   await supplierStore.delete(supplier)
 }
 
-async function onSubmit(values: Supplier) {
-  await supplierStore.createSupplier(values)
+async function onSubmit(supplier: Supplier) {
+  await supplierStore.createSupplier(supplier)
 }
 </script>
 
 <template>
-  <SupplierDataTable :onClickDelete="onClickDelete" :onClickUpdate="onClickUpdate">
+  <SupplierDataTable :onClickDelete="onClickDelete">
     <FormDialog
       dialog-title="Cadastro de Fornecedores"
       dialog-description="Preencha os dados para cadastrar e depois aperte o botão de salvar"

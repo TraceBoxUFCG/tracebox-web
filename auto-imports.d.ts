@@ -73,6 +73,7 @@ declare global {
   const useMyFetch: typeof import('@vueuse/core')['useFetch']
   const usePageStore: typeof import('./src/stores/page')['usePageStore']
   const useProductStore: typeof import('./src/stores/product')['useProductStore']
+  const useProductVarietyStore: typeof import('./src/stores/productVariety')['useProductVarietyStore']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
@@ -91,7 +92,7 @@ declare global {
   export type { Component, ComponentPublicInstance, ComputedRef, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { Supplier, Address, PaginatedResponse, Product, Packaging, Asset, GenerateAssetTagPayload } from '@/types'
+  export type { Supplier, Address, PaginatedResponse, Product, Packaging, Asset, GenerateAssetTagPayload, ProductVariety } from '@/types'
   import('@/types')
   // @ts-ignore
   export type { AssetStatusEnum } from './src/types/assets'
