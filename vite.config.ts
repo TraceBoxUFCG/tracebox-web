@@ -35,10 +35,11 @@ export default defineConfig({
           imports: [
             'Supplier',
             'Address',
-            'StatesEnum',
             'PaginatedResponse',
             'Product',
-            'Packaging'
+            'Packaging',
+            'Asset',
+            'GenerateAssetTagPayload'
           ],
           type: true
         }

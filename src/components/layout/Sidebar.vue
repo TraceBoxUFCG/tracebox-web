@@ -14,6 +14,11 @@ const links = [
     title: 'Catálogo',
     to: '/catalog',
     icon: 'lucide:apple'
+  },
+  {
+    title: 'Assets',
+    to: '/assets',
+    icon: 'lucide:box'
   }
 ]
 
