@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import * as z from 'zod'
+const props = defineProps<{
+  onSubmit: (file: File) => void
+}>()
 
 const file = ref<File>()
 const isValidFile = ref<boolean>(false)
@@ -21,14 +24,17 @@ const handleFileChange = (event: Event) => {
 }
 
 const handleSubmit = () => {
-  //
+  if (file.value) {
+    props.onSubmit(file.value)
+  }
+
+  file.value = undefined
 }
 </script>
 
 <template>
   <div class="flex flex-col items-end gap-4">
     <Input
-      v-bind:modelValue="file"
       class="w-full bg-muted text-primary"
       @change="handleFileChange"
       type="file"

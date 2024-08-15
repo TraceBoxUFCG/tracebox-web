@@ -30,12 +30,25 @@ export const useProductVarietyStore = defineStore('product-variety-store', {
       this.productVarietiesResponse = response
     },
 
+    async delete(productVariety: ProductVariety) {
+      try {
+        await this.axios.delete(`/catalog/product_variety/${productVariety.id}`)
+        this.fill()
+      } catch {
+        toast({
+          title: 'Falha na tentativa de deletar variedade.',
+          description: `Não foi possivel deletar a variedade ${productVariety.name} do produto ${productVariety.product.name}.`,
+          variant: 'destructive'
+        })
+      }
+    },
+
     async importVarieties(file: File) {
       try {
         const formData = new FormData()
         formData.append('file', file)
 
-        await this.axios.post('catalog/product_variety/import', file, {
+        await this.axios.post('catalog/product_variety/import', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
