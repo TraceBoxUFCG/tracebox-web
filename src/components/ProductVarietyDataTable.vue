@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import CommonDropdownMenu from '@/components/layout/CommonDropdownMenu.vue'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
-
-const productStore = useProductStore()
+import CommonDropdownMenu from '@/components/layout/CommonDropdownMenu.vue'
 
 const props = defineProps<{
   onClickDelete: (object: any) => void
 }>()
 
-const columns: ColumnDef<Product>[] = [
+const productVarietyStore = useProductVarietyStore()
+
+const columns: ColumnDef<ProductVariety>[] = [
   {
     accessorKey: 'id',
     header: () => h('div', { class: 'text-left' }, 'Id'),
@@ -17,7 +17,7 @@ const columns: ColumnDef<Product>[] = [
       return h(
         RouterLink,
         {
-          to: `/product/${row.original.id}`,
+          to: `/catalog/product/variety${row.original.id}`,
           class: 'text-left font-medium hover:bg-muted block w-full'
         },
         () => row.original.id
@@ -25,28 +25,17 @@ const columns: ColumnDef<Product>[] = [
     }
   },
   {
-    accessorKey: 'name',
+    accessorKey: 'Variedade',
     header: () => h('div', { class: 'text-left' }, 'Nome'),
     cell: ({ row }) => {
       return h('div', { to: '', class: 'text-left font-medium' }, row.original.name)
     }
   },
   {
-    accessorKey: 'average_unit_weight',
-    header: () => h('div', { class: 'text-left' }, 'Peso médio'),
+    accessorKey: 'product',
+    header: () => h('div', { class: 'text-left' }, 'Produto'),
     cell: ({ row }) => {
-      return h('div', { to: '', class: 'text-left font-medium' }, row.original.average_unit_weight)
-    }
-  },
-  {
-    accessorKey: 'packaging',
-    header: () => h('div', { class: 'text-left' }, 'Empacotamento de Recebimento'),
-    cell: ({ row }) => {
-      return h(
-        'div',
-        { to: '', class: 'text-left font-medium' },
-        row.original.packaging.description
-      )
+      return h('div', { to: '', class: 'text-left font-medium' }, row.original.product.name)
     }
   },
   {
@@ -68,16 +57,16 @@ const columns: ColumnDef<Product>[] = [
 ]
 
 const onSearch = async (input: string, page: number) => {
-  await productStore.search(input, page)
+  await productVarietyStore.search(input, page)
 }
 </script>
 
 <template>
   <FilterableDataTable
     :on-search="onSearch"
-    placeholder="Filtre os Produtos"
+    placeholder="Filtre os assets"
     :columns="columns"
-    :data="productStore.productsResponse"
+    :data="productVarietyStore.productVarietiesResponse"
   >
     <slot />
   </FilterableDataTable>

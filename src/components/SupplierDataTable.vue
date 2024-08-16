@@ -6,7 +6,6 @@ import { RouterLink } from 'vue-router'
 const supplierStore = useSupplierStore()
 
 const props = defineProps<{
-  onClickUpdate: (object: any) => void
   onClickDelete: (object: any) => void
 }>()
 
@@ -57,7 +56,6 @@ const columns: ColumnDef<Supplier>[] = [
         { class: 'relative' },
         h(CommonDropdownMenu, {
           id: supplier.id,
-          onClickUpdate: () => props.onClickUpdate(supplier),
           onClickDelete: () => props.onClickDelete(supplier)
         })
       )

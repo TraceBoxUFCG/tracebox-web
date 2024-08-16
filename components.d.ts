@@ -102,6 +102,8 @@ declare module 'vue' {
     PopoverTrigger: typeof import('./src/components/ui/popover/PopoverTrigger.vue')['default']
     ProductDataTable: typeof import('./src/components/ProductDataTable.vue')['default']
     ProductForm: typeof import('./src/components/ProductForm.vue')['default']
+    ProductVarietyDataTable: typeof import('./src/components/ProductVarietyDataTable.vue')['default']
+    ProductVarietyImportForm: typeof import('./src/components/ProductVarietyImportForm.vue')['default']
     RadioGroup: typeof import('./src/components/ui/radio-group/RadioGroup.vue')['default']
     RadioGroupItem: typeof import('./src/components/ui/radio-group/RadioGroupItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

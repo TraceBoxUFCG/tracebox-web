@@ -3,7 +3,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/comp
 import { UnitEnum } from '@/types/common'
 
 defineProps<{
-  onSubmit: (object: Supplier) => void
+  onSubmit: (object: Product) => void
 }>()
 const stepIndex = ref(1)
 

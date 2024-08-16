@@ -1,7 +1,6 @@
 <script setup lang="ts">
 defineProps<{
   id: number
-  onClickUpdate: (object: any) => void
   onClickDelete: (object: any) => void
 }>()
 </script>

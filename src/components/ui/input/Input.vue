@@ -7,12 +7,12 @@ import { vMaska } from 'maska/vue'
 const props = defineProps<{
   mask?: string
   defaultValue?: string | number
-  modelValue?: string | number
+  modelValue?: string | number | File
   class?: HTMLAttributes['class']
 }>()
 
 const emits = defineEmits<{
-  (e: 'update:modelValue', payload: string | number): void
+  (e: 'update:modelValue', payload: string | number | File): void
 }>()
 
 const modelValue = useVModel(props, 'modelValue', emits, {

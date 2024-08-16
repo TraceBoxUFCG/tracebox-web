@@ -16,6 +16,11 @@ const links = [
     icon: 'lucide:apple'
   },
   {
+    title: 'Variedades',
+    to: '/catalog/variety',
+    icon: 'lucide:layout-grid'
+  },
+  {
     title: 'Assets',
     to: '/assets',
     icon: 'lucide:box'
