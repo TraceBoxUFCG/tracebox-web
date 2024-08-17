@@ -64,7 +64,7 @@ const columns: ColumnDef<Asset>[] = [
         { class: 'relative' },
         h(AssetDropDownMenu, {
           id: asset.id,
-          onClickDownload: () => () => {}
+          onClickDownload: () => assetStore.getTagById(asset.id)
         })
       )
     }

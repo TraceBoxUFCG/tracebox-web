@@ -39,6 +39,18 @@ export const useAssetStore = defineStore('asset-store', {
       document.body.removeChild(link)
 
       await this.fill()
+    },
+    async getTagById(id: number) {
+      const response = await this.axios.get(`/stock/asset/${id}/tag`, {
+        responseType: 'blob'
+      })
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', `${id}_tag.pdf`)
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
     }
   }
 })
