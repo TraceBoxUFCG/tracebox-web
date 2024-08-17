@@ -7,13 +7,6 @@ export const usePurchaseOrderStore = defineStore('purchase-order-store', {
   },
 
   actions: {
-    async fill() {
-      const response: PaginatedResponse<PurchaseOrder> = (
-        await this.axios.get('/purchaes/purchase_order', {})
-      ).data
-      this.purchaseOrders = response.items
-      this.purchaseOrdersResponse = response
-    },
     async search(
       page: number,
       q?: string,
