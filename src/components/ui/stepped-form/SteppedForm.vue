@@ -15,24 +15,20 @@ const props = defineProps<{
   formSchema: any
   steps: StepType[]
   onSubmit: (values: any) => void
-  stepIndex: number
 }>()
-const emit = defineEmits(['update:stepIndex'])
 
-const stepIndexAux = toRef(props.stepIndex)
-const canGoNext = computed(() => props.stepIndex < props.steps.length)
-const canGoBack = computed(() => props.stepIndex > 1)
+const stepIndex = defineModel<number>('stepIndex', { required: true })
+const canGoNext = computed(() => stepIndex.value < props.steps.length)
+const canGoBack = computed(() => stepIndex.value > 1)
 
-function goNext() {
+const goNext = () => {
   if (get(canGoNext)) {
-    set(stepIndexAux, stepIndexAux.value + 1)
-    emit('update:stepIndex', stepIndexAux.value)
+    set(stepIndex, stepIndex.value + 1)
   }
 }
-function goBack() {
+const goBack = () => {
   if (get(canGoBack)) {
-    set(stepIndexAux, stepIndexAux.value - 1)
-    emit('update:stepIndex', stepIndexAux.value)
+    set(stepIndex, stepIndex.value - 1)
   }
 }
 </script>
@@ -42,7 +38,7 @@ function goBack() {
     v-slot="{ meta, values, validate }"
     as=""
     keep-values
-    :validation-schema="toTypedSchema(formSchema[stepIndexAux - 1])"
+    :validation-schema="toTypedSchema(formSchema[stepIndex - 1])"
   >
     <form
       @submit="
@@ -50,13 +46,13 @@ function goBack() {
           e.preventDefault()
           validate()
 
-          if (stepIndexAux === steps.length) {
+          if (stepIndex === steps.length) {
             onSubmit(values)
           }
         }
       "
     >
-      <Stepper v-model="stepIndexAux" class="flex w-full items-start gap-2">
+      <Stepper v-model="stepIndex" class="flex w-full items-start gap-2">
         <StepperItem
           v-for="step in steps"
           :key="step.step"
@@ -109,7 +105,7 @@ function goBack() {
         <Button :disabled="!canGoBack" variant="outline" size="sm" @click="goBack"> Voltar </Button>
         <div class="flex items-center gap-3">
           <Button
-            v-if="stepIndexAux !== steps.length"
+            v-if="stepIndex !== steps.length"
             :type="meta.valid ? 'button' : 'submit'"
             :disabled="!canGoNext"
             size="sm"
@@ -117,7 +113,7 @@ function goBack() {
           >
             Próximo
           </Button>
-          <Button v-if="stepIndexAux === steps.length" size="sm" type="submit"> Salvar </Button>
+          <Button v-if="stepIndex === steps.length" size="sm" type="submit"> Salvar </Button>
         </div>
       </div>
     </form>
