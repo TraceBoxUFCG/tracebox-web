@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PurchaseOrderDataTable from '@/components/PurchaseOrderDataTable.vue'
+import PurchaseOrderDataTable from '@/components/purchaseOrder/PurchaseOrderDataTable.vue'
 
 const pageStore = usePageStore()
 pageStore.title = 'Ordem de Compra'

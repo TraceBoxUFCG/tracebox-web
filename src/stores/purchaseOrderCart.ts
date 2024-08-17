@@ -19,7 +19,6 @@ export const usePurchaseOrderCart = defineStore('purchase-order-cart-store', {
     },
     setItemCount(item: string, count: number) {},
     place() {
-      const authUserStore = usePurchaseOrderStore()
       this.$reset()
     }
   }
