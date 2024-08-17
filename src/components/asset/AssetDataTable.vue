@@ -2,8 +2,8 @@
 import { AssetStatusEnum } from '@/types/assets'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
-import AssetDropDownMenu from './layout/AssetDropDownMenu.vue'
 import { debounce } from 'lodash'
+import AssetDropDownMenu from './AssetDropDownMenu.vue'
 
 const assetStore = useAssetStore()
 

@@ -6,39 +6,31 @@ import { get, set } from '@vueuse/core'
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
   data: PaginatedResponse
-  pageIndex: number
-  searchInput: string
   placeholder: string
 }>()
 
-const emit = defineEmits(['update:pageIndex', 'update:searchInput'])
+const searchInput = defineModel<string>('searchInput', { required: true })
+const pageIndex = defineModel<number>('pageIndex', { required: true })
 
-const pageAux = toRef(props.pageIndex)
-const searchInputAux = toRef(props.searchInput)
-
-const canGoNext = computed(() => props.data.items.length < pageAux)
+const canGoNext = computed(() => props.data.items.length < pageIndex.value)
 const canGoBack = computed(() => props.data.items.length > 1)
 
 const goNext = () => {
   if (get(canGoNext)) {
-    set(pageAux, pageAux.value + 1)
-    emit('update:pageIndex', pageAux.value)
+    set(pageIndex, pageIndex.value + 1)
   }
 }
 const goBack = () => {
   if (get(canGoBack)) {
-    set(pageAux, pageAux.value - 1)
-    emit('update:pageIndex', pageAux.value)
+    set(pageIndex, pageIndex.value - 1)
   }
 }
 const setPage = (selectedPage: number) => {
-  set(pageAux, selectedPage)
-  emit('update:pageIndex', selectedPage)
+  set(pageIndex, selectedPage)
 }
 
 const onInputChange = (input: string | number) => {
-  set(searchInputAux, String(input))
-  emit('update:searchInput', String(input))
+  set(searchInput, String(input))
 }
 </script>
 
@@ -48,7 +40,7 @@ const onInputChange = (input: string | number) => {
       <div class="flex flex-row gap-1">
         <Input
           v-on:update:model-value="onInputChange"
-          :model-value="searchInputAux"
+          :model-value="searchInput"
           class="w-[350px]"
           :placeholder="placeholder"
         />

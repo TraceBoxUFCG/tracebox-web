@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { PurchaseOrderStatusEnum } from '@/types/purchaseOrder'
-import { DateFormatter, type DateValue, getLocalTimeZone } from '@internationalized/date'
+import { type DateValue, getLocalTimeZone } from '@internationalized/date'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { debounce } from 'lodash'
 import { RouterLink } from 'vue-router'
-import { cn } from '@/lib/utils'
+import StatusSelect from '../common/inputs/StatusSelect.vue'
 
 const purchaseOrderStore = usePurchaseOrderStore()
 
@@ -90,29 +90,6 @@ watch(searchInput, () => {
 watch(pageIndex, () => {
   searchWithoutDebounce()
 })
-
-const df = new DateFormatter('pt-br', {
-  dateStyle: 'long'
-})
-
-const possibleStatus = [
-  {
-    label: 'Em Criação',
-    value: PurchaseOrderStatusEnum.DRAFT
-  },
-  {
-    label: 'Confirmado',
-    value: PurchaseOrderStatusEnum.CONFIRMED
-  },
-  {
-    label: 'Recebida',
-    value: PurchaseOrderStatusEnum.RECEIVED
-  },
-  {
-    label: 'Loteada',
-    value: PurchaseOrderStatusEnum.LOTTED
-  }
-]
 </script>
 
 <template>
@@ -124,44 +101,8 @@ const possibleStatus = [
     :data="purchaseOrderStore.purchaseOrdersResponse"
   >
     <template v-slot:search>
-      <Popover>
-        <PopoverTrigger as-child>
-          <Button
-            variant="outline"
-            :class="
-              cn(
-                'w-[300px] justify-start text-left font-normal',
-                !expectedArrivalDate && 'text-muted-foreground'
-              )
-            "
-          >
-            <iconify-icon lass="mr-3 size-4" icon="lucide:calendar"></iconify-icon>
-            {{
-              expectedArrivalDate
-                ? df.format(expectedArrivalDate.toDate(getLocalTimeZone()))
-                : 'Data de Recebimento'
-            }}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent class="w-auto p-0">
-          <Calendar v-model="expectedArrivalDate" initial-focus />
-        </PopoverContent>
-      </Popover>
-
-      <Select v-model="status">
-        <SelectTrigger class="w-[300px]">
-          <SelectValue placeholder="Selecione um status" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Status da ordem de compra</SelectLabel>
-            <SelectItem v-for="status in possibleStatus" :key="status.value" :value="status.value">
-              {{ status.label }}
-            </SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-
+      <DatePicker v-model="expectedArrivalDate" />
+      <StatusSelect v-model:status="status" />
       <Button @click="searchWithoutDebounce">
         <iconify-icon lass="mr-3 size-4" icon="lucide:search" />
         Buscar
