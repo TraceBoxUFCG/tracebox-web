@@ -14,6 +14,7 @@ declare global {
   const PaginatedResponse: typeof import('@/types')['PaginatedResponse']
   const Product: typeof import('@/types')['Product']
   const ProductVariety: typeof import('@/types')['ProductVariety']
+  const PurchaseOrderStatusEnum: typeof import('./src/types/purchase_order')['PurchaseOrderStatusEnum']
   const StatesEnum: typeof import('./src/types/common')['StatesEnum']
   const StatusEnum: typeof import('./src/types/assets')['StatusEnum']
   const Supplier: typeof import('@/types')['Supplier']
@@ -82,6 +83,7 @@ declare global {
   const usePageStore: typeof import('./src/stores/page')['usePageStore']
   const useProductStore: typeof import('./src/stores/product')['useProductStore']
   const useProductVarietyStore: typeof import('./src/stores/productVariety')['useProductVarietyStore']
+  const usePurchaseOrderStore: typeof import('./src/stores/purchase_order')['usePurchaseOrderStore']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
@@ -108,4 +110,7 @@ declare global {
   // @ts-ignore
   export type { UnitEnum, StatesEnum } from './src/types/common'
   import('./src/types/common')
+  // @ts-ignore
+  export type { PurchaseOrderStatusEnum } from './src/types/purchase_order'
+  import('./src/types/purchase_order')
 }

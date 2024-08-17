@@ -24,6 +24,11 @@ const links = [
     title: 'Assets',
     to: '/assets',
     icon: 'lucide:box'
+  },
+  {
+    title: 'Ordens de Compra',
+    to: '/purchase_order',
+    icon: 'lucide:pen-box'
   }
 ]
 

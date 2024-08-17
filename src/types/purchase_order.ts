@@ -1,9 +1,15 @@
 import type { Supplier } from './supplier'
-
 import type { ProductVariety } from './productVariety'
+
+export enum PurchaseOrderStatusEnum {
+  DRAFT = 'DRAFT',
+  CONFIRMED = 'CONFIRMED',
+  RECEIVED = 'RECEIVED',
+  LOTTED = 'LOTTED'
+}
 export interface PurchaseOrder {
   expected_arrival_date: string
-  status: string
+  status: PurchaseOrderStatusEnum
   id: number
   supplier: Supplier
   items: PurchaseOrderItem[]
