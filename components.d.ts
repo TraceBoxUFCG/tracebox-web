@@ -60,6 +60,7 @@ declare module 'vue' {
     Checkbox: typeof import('./src/components/ui/checkbox/Checkbox.vue')['default']
     CommonDropdownMenu: typeof import('./src/components/layout/main/CommonDropdownMenu.vue')['default']
     ConfirmDeleteDialog: typeof import('./src/components/layout/main/ConfirmDeleteDialog.vue')['default']
+    CustomNumberInput: typeof import('./src/components/common/inputs/CustomNumberInput.vue')['default']
     DataTable: typeof import('./src/components/ui/data-table/DataTable.vue')['default']
     DatePicker: typeof import('./src/components/common/inputs/DatePicker.vue')['default']
     Dialog: typeof import('./src/components/ui/dialog/Dialog.vue')['default']
@@ -187,5 +188,6 @@ declare module 'vue' {
     ToastTitle: typeof import('./src/components/ui/toast/ToastTitle.vue')['default']
     ToastViewport: typeof import('./src/components/ui/toast/ToastViewport.vue')['default']
     TopNavbar: typeof import('./src/components/layout/main/TopNavbar.vue')['default']
+    UnitSelect: typeof import('./src/components/common/inputs/UnitSelect.vue')['default']
   }
 }

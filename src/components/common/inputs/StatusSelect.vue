@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { PurchaseOrderStatusEnum } from '@/types/purchaseOrder'
-const status = defineModel<PurchaseOrderStatusEnum>('status')
+import { useForwardPropsEmits, type SelectRootEmits, type SelectRootProps } from 'radix-vue'
+import type { HTMLAttributes } from 'vue'
 
 const possibleStatus = [
   {
@@ -20,11 +21,22 @@ const possibleStatus = [
     value: PurchaseOrderStatusEnum.LOTTED
   }
 ]
+
+const props = defineProps<SelectRootProps & { class?: HTMLAttributes['class'] }>()
+const emits = defineEmits<SelectRootEmits>()
+
+const delegatedProps = computed(() => {
+  const { class: _, ...delegated } = props
+
+  return delegated
+})
+
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
-  <Select v-model="status">
-    <SelectTrigger class="w-[300px]">
+  <Select v-bind="forwarded">
+    <SelectTrigger :class="props.class">
       <SelectValue placeholder="Selecione um status" />
     </SelectTrigger>
     <SelectContent>

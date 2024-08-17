@@ -2,6 +2,7 @@
 import { type DateValue } from '@internationalized/date'
 
 const expectedArrivalDate = ref<DateValue>()
+const boxesQuantity = ref<number>()
 </script>
 
 <template>
@@ -12,6 +13,7 @@ const expectedArrivalDate = ref<DateValue>()
     </CardHeader>
     <CardContent>
       <DatePicker v-model="expectedArrivalDate" />
+      <CustomNumberInput v-model:model-value="boxesQuantity" />
     </CardContent>
     <CardFooter class="flex justify-between px-6 pb-6">
       <Button>Adicionar item</Button>

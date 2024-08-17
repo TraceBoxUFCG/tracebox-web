@@ -102,7 +102,7 @@ watch(pageIndex, () => {
   >
     <template v-slot:search>
       <DatePicker v-model="expectedArrivalDate" />
-      <StatusSelect v-model:status="status" />
+      <StatusSelect class="w-[300px]" v-model="status" />
       <Button @click="searchWithoutDebounce">
         <iconify-icon lass="mr-3 size-4" icon="lucide:search" />
         Buscar

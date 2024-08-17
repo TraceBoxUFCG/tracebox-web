@@ -57,6 +57,7 @@ const onInputChange = (input: string | number) => {
       />
       <Pagination
         v-slot="{ page }"
+        v-if="props.data.items"
         :total="props.data.total"
         :sibling-count="1"
         show-edges
