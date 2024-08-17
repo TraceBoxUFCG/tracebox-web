@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PurchaseOrderStatusEnum } from '@/types/purchase_order'
+import { PurchaseOrderStatusEnum } from '@/types/purchaseOrder'
 import { DateFormatter, type DateValue, getLocalTimeZone } from '@internationalized/date'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { debounce } from 'lodash'

@@ -54,15 +54,15 @@ const links = [
 
 const accountLinks = [
   {
-    title: 'Profile',
+    title: 'Perfil',
     icon: 'lucide:user'
   },
   {
-    title: 'Settings',
+    title: 'Ajustes',
     icon: 'lucide:settings'
   },
   {
-    title: 'Sign out',
+    title: 'Sair',
     icon: 'lucide:log-out'
   }
 ]
