@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import CommonDropdownMenu from '@/components/layout/CommonDropdownMenu.vue'
 import type { ColumnDef } from '@tanstack/vue-table'
+import { debounce } from 'lodash'
 import { RouterLink } from 'vue-router'
 
 const productStore = useProductStore()
@@ -67,14 +68,30 @@ const columns: ColumnDef<Product>[] = [
   }
 ]
 
-const onSearch = async (input: string, page: number) => {
-  await productStore.search(input, page)
+const pageIndex = ref(1)
+const searchInput = ref('')
+
+const searchWithDebounce = debounce(() => {
+  productStore.search(searchInput.value, pageIndex.value)
+}, 1000)
+
+const searchWithoutDebounce = () => {
+  productStore.search(searchInput.value, pageIndex.value)
 }
+
+watch(searchInput, () => {
+  searchWithDebounce()
+})
+
+watch(pageIndex, () => {
+  searchWithoutDebounce()
+})
 </script>
 
 <template>
   <FilterableDataTable
-    :on-search="onSearch"
+    v-model:search-input="searchInput"
+    v-model:page-index="pageIndex"
     placeholder="Filtre os Produtos"
     :columns="columns"
     :data="productStore.productsResponse"

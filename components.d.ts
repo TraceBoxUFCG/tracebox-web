@@ -104,6 +104,7 @@ declare module 'vue' {
     ProductForm: typeof import('./src/components/ProductForm.vue')['default']
     ProductVarietyDataTable: typeof import('./src/components/ProductVarietyDataTable.vue')['default']
     ProductVarietyImportForm: typeof import('./src/components/ProductVarietyImportForm.vue')['default']
+    PurchaseOrderDataTable: typeof import('./src/components/PurchaseOrderDataTable.vue')['default']
     RadioGroup: typeof import('./src/components/ui/radio-group/RadioGroup.vue')['default']
     RadioGroupItem: typeof import('./src/components/ui/radio-group/RadioGroupItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

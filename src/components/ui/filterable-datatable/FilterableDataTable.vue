@@ -1,25 +1,48 @@
 <script setup lang="ts" generic="TData, TValue">
 import type { ColumnDef } from '@tanstack/vue-table'
 import { Pagination, PaginationList, PaginationListItem } from '@/components/ui/pagination'
-
-import { debounce } from 'lodash'
+import { get, set } from '@vueuse/core'
 
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
   data: PaginatedResponse
-  placeholder?: string
-  onSearch: (input: string, page: number) => void
+  pageIndex: number
+  searchInput: string
+  placeholder: string
 }>()
 
-const searchInput = ref('')
-const currentPage = ref(1)
+const emit = defineEmits(['update:pageIndex', 'update:searchInput'])
 
-const searchWithDebounce = debounce(() => {
-  props.onSearch(searchInput.value, currentPage.value)
-}, 1000)
+const pageAux = toRef(props.pageIndex)
+const searchInputAux = toRef(props.searchInput)
 
-const searchWithoutDebouce = () => {
-  props.onSearch(searchInput.value, currentPage.value)
+const canGoNext = computed(() => props.data.items.length < pageAux)
+const canGoBack = computed(() => props.data.items.length > 1)
+
+const goNext = () => {
+  console.log('CHAMEI O NEXT')
+
+  if (get(canGoNext)) {
+    set(pageAux, pageAux.value + 1)
+    emit('update:pageIndex', pageAux.value)
+  }
+}
+const goBack = () => {
+  if (get(canGoBack)) {
+    set(pageAux, pageAux.value - 1)
+    emit('update:pageIndex', pageAux.value)
+  }
+}
+const setPage = (selectedPage: number) => {
+  console.log('CHAMEI O SET')
+
+  set(pageAux, selectedPage)
+  emit('update:pageIndex', selectedPage)
+}
+
+const onInputChange = (input: string | number) => {
+  set(searchInputAux, String(input))
+  emit('update:searchInput', String(input))
 }
 </script>
 
@@ -27,14 +50,8 @@ const searchWithoutDebouce = () => {
   <div class="flex flex-col gap-5 px-5">
     <div class="flex items-center justify-between">
       <Input
-        :onchange="searchWithDebounce"
-        :model-value="searchInput"
-        @update:model-value="
-          (input) => {
-            searchInput = String(input)
-            searchWithDebounce()
-          }
-        "
+        v-on:update:model-value="onInputChange"
+        :model-value="searchInputAux"
         class="max-w-sm"
         :placeholder="placeholder"
       />
@@ -52,12 +69,11 @@ const searchWithoutDebouce = () => {
         :total="props.data.total"
         :sibling-count="1"
         show-edges
-        :default-page="currentPage"
+        :default-page="1"
         class="flex w-full items-center justify-center"
       >
         <PaginationList v-slot="{ items }" class="flex items-center gap-1">
-          <PaginationFirst />
-          <PaginationPrev />
+          <PaginationPrev :onclick="goBack" />
 
           <template v-for="(item, index) in items">
             <PaginationListItem
@@ -69,10 +85,7 @@ const searchWithoutDebouce = () => {
               <Button
                 :onclick="
                   () => {
-                    if (currentPage !== item.value) {
-                      currentPage = item.value
-                      searchWithoutDebouce()
-                    }
+                    setPage(item.value)
                   }
                 "
                 class="size-10 p-0"
@@ -84,26 +97,7 @@ const searchWithoutDebouce = () => {
             <PaginationEllipsis v-else :key="item.type" :index="index" />
           </template>
 
-          <PaginationNext
-            :onclick="
-              () => {
-                if (items.length < currentPage) {
-                  currentPage = currentPage + 1
-                  searchWithoutDebouce()
-                }
-              }
-            "
-          />
-          <PaginationLast
-            :onclick="
-              () => {
-                if (items.length > 1) {
-                  currentPage = currentPage + 1
-                  searchWithoutDebouce()
-                }
-              }
-            "
-          />
+          <PaginationNext :onclick="goNext" />
         </PaginationList>
       </Pagination>
     </div>

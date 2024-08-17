@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import CommonDropdownMenu from '@/components/layout/CommonDropdownMenu.vue'
 import type { ColumnDef } from '@tanstack/vue-table'
+import { debounce } from 'lodash'
 import { RouterLink } from 'vue-router'
 
 const supplierStore = useSupplierStore()
@@ -11,7 +12,7 @@ const props = defineProps<{
 
 const columns: ColumnDef<Supplier>[] = [
   {
-    accessorKey: 'name',
+    accessorKey: 'id',
     header: () => h('div', { class: 'text-left' }, 'Id'),
     cell: ({ row }) => {
       return h(
@@ -32,14 +33,14 @@ const columns: ColumnDef<Supplier>[] = [
     }
   },
   {
-    accessorKey: 'Documento',
+    accessorKey: 'document',
     header: () => h('div', { class: 'text-left' }, 'Documento'),
     cell: ({ row }) => {
       return h('div', { to: '', class: 'text-left font-medium' }, row.original.document)
     }
   },
   {
-    accessorKey: 'Cidade',
+    accessorKey: 'city',
     header: () => h('div', { class: 'text-left' }, 'Cidade'),
     cell: ({ row }) => {
       return h('div', { to: '', class: 'text-left font-medium' }, row.original.address.city)
@@ -63,14 +64,30 @@ const columns: ColumnDef<Supplier>[] = [
   }
 ]
 
-const onSearch = async (input: string, page: number) => {
-  await supplierStore.search(input, page)
+const pageIndex = ref(1)
+const searchInput = ref('')
+
+const searchWithDebounce = debounce(() => {
+  supplierStore.search(searchInput.value, pageIndex.value)
+}, 1000)
+
+const searchWithoutDebounce = () => {
+  supplierStore.search(searchInput.value, pageIndex.value)
 }
+
+watch(searchInput, () => {
+  searchWithDebounce()
+})
+
+watch(pageIndex, () => {
+  searchWithoutDebounce()
+})
 </script>
 
 <template>
   <FilterableDataTable
-    :on-search="onSearch"
+    v-model:search-input="searchInput"
+    v-model:page-index="pageIndex"
     placeholder="Filtre os Fornecedores"
     :columns="columns"
     :data="supplierStore.suppliersResponse"

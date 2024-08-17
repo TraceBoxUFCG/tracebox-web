@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import PurchaseOrderDataTable from '@/components/PurchaseOrderDataTable.vue'
+
 const pageStore = usePageStore()
 pageStore.title = 'Ordem de Compra'
 const purchaseOrderStore = usePurchaseOrderStore()
@@ -6,5 +8,5 @@ purchaseOrderStore.fill()
 </script>
 
 <template>
-  <ProductVarietyDataTable @click-delete="() => {}"> </ProductVarietyDataTable>
+  <PurchaseOrderDataTable @click-delete="() => {}"> </PurchaseOrderDataTable>
 </template>
