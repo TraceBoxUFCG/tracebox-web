@@ -81,10 +81,12 @@ watch(pageIndex, () => {
   <FilterableDataTable
     v-model:search-input="searchInput"
     v-model:page-index="pageIndex"
-    placeholder="Filtre os assets"
+    placeholder="Filtre as variedades de produto"
     :columns="columns"
     :data="productVarietyStore.productVarietiesResponse"
   >
-    <slot />
+    <template v-slot:action>
+      <slot />
+    </template>
   </FilterableDataTable>
 </template>

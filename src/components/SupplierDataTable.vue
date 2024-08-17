@@ -92,6 +92,8 @@ watch(pageIndex, () => {
     :columns="columns"
     :data="supplierStore.suppliersResponse"
   >
-    <slot />
+    <template v-slot:action>
+      <slot />
+    </template>
   </FilterableDataTable>
 </template>

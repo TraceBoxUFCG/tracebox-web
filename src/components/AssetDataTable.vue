@@ -98,6 +98,8 @@ watch(pageIndex, () => {
     :columns="columns"
     :data="assetStore.assetsResponse"
   >
-    <slot />
+    <template v-slot:action>
+      <slot />
+    </template>
   </FilterableDataTable>
 </template>

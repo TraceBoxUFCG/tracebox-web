@@ -8,5 +8,10 @@ purchaseOrderStore.fill()
 </script>
 
 <template>
-  <PurchaseOrderDataTable @click-delete="() => {}"> </PurchaseOrderDataTable>
+  <PurchaseOrderDataTable>
+    <Button>
+      <iconify-icon lass="mr-3 size-4" icon="lucide:plus" />
+      Criar pedido de compra
+    </Button>
+  </PurchaseOrderDataTable>
 </template>

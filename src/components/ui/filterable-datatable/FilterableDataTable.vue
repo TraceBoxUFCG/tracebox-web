@@ -20,8 +20,6 @@ const canGoNext = computed(() => props.data.items.length < pageAux)
 const canGoBack = computed(() => props.data.items.length > 1)
 
 const goNext = () => {
-  console.log('CHAMEI O NEXT')
-
   if (get(canGoNext)) {
     set(pageAux, pageAux.value + 1)
     emit('update:pageIndex', pageAux.value)
@@ -34,8 +32,6 @@ const goBack = () => {
   }
 }
 const setPage = (selectedPage: number) => {
-  console.log('CHAMEI O SET')
-
   set(pageAux, selectedPage)
   emit('update:pageIndex', selectedPage)
 }
@@ -49,13 +45,16 @@ const onInputChange = (input: string | number) => {
 <template>
   <div class="flex flex-col gap-5 px-5">
     <div class="flex items-center justify-between">
-      <Input
-        v-on:update:model-value="onInputChange"
-        :model-value="searchInputAux"
-        class="max-w-sm"
-        :placeholder="placeholder"
-      />
-      <slot />
+      <div class="flex flex-row gap-1">
+        <Input
+          v-on:update:model-value="onInputChange"
+          :model-value="searchInputAux"
+          class="w-[350px]"
+          :placeholder="placeholder"
+        />
+        <slot name="search" />
+      </div>
+      <slot name="action" />
     </div>
     <div class="flex w-full flex-col items-center justify-center gap-5">
       <DataTable
@@ -83,7 +82,7 @@ const onInputChange = (input: string | number) => {
               as-child
             >
               <Button
-                :onclick="
+                :click="
                   () => {
                     setPage(item.value)
                   }
