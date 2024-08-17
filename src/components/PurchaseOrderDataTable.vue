@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PurchaseOrderStatusEnum } from '@/types/purchase_order'
-import { DateFormatter, type DateValue, getLocalTimeZone, today } from '@internationalized/date'
+import { DateFormatter, type DateValue, getLocalTimeZone } from '@internationalized/date'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { debounce } from 'lodash'
 import { RouterLink } from 'vue-router'
