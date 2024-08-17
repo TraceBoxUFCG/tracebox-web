@@ -37,10 +37,18 @@ const columns: ColumnDef<Asset>[] = [
     }
   },
   {
+    accessorKey: 'product',
+    header: () => h('div', { class: 'text-left' }, 'Produto'),
+    cell: ({ row }) => {
+      const product = row.original.product ? row.original.product.name : '-'
+      return h('div', { to: '', class: 'text-left font-medium' }, product)
+    }
+  },
+  {
     accessorKey: 'packaging',
     header: () => h('div', { class: 'text-left' }, 'Empacotamento'),
     cell: ({ row }) => {
-      const packaging = row.original.packaging ? row.original.packaging.description : 'Asset Vazío'
+      const packaging = row.original.product ? row.original.product.packaging.description : '-'
       return h('div', { to: '', class: 'text-left font-medium' }, packaging)
     }
   },

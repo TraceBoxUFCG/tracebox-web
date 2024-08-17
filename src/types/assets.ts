@@ -1,4 +1,4 @@
-import type { Packaging } from './product'
+import type { Product } from './product'
 
 export enum AssetStatusEnum {
   EMPTY = 'EMPTY',
@@ -9,7 +9,7 @@ export enum AssetStatusEnum {
 export type Asset = {
   id?: number
   status: AssetStatusEnum
-  packaging?: Packaging
+  product?: Product
 }
 
 export type GenerateAssetTagPayload = {
