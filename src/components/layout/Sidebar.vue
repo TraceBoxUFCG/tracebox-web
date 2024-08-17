@@ -3,49 +3,61 @@ const links = [
   {
     title: 'Dashboard',
     to: '/',
-    icon: 'lucide:house'
+    icon: 'lucide:house',
+    children: []
   },
   {
     title: 'Fornecedores',
     to: '/suppliers',
-    icon: 'lucide:users-round'
+    icon: 'lucide:users-round',
+    children: []
   },
   {
     title: 'Catálogo',
-    to: '/catalog',
-    icon: 'lucide:apple'
-  },
-  {
-    title: 'Variedades',
-    to: '/catalog/variety',
-    icon: 'lucide:layout-grid'
+    icon: 'lucide:notebook',
+    children: [
+      {
+        title: 'Produtos',
+        to: '/catalog/product',
+        icon: 'lucide:apple'
+      },
+      {
+        title: 'Variedades',
+        to: '/catalog/variety',
+        icon: 'lucide:layout-grid'
+      }
+    ]
   },
   {
     title: 'Assets',
     to: '/assets',
-    icon: 'lucide:box'
+    icon: 'lucide:box',
+    children: []
   },
   {
-    title: 'Ordens de Compra',
-    to: '/purchase_order',
-    icon: 'lucide:pen-box'
+    title: 'Compras',
+    icon: 'lucide:baggage-claim',
+    children: [
+      {
+        title: 'Ordens de Compra',
+        to: '/purchases/purchase_order',
+        icon: 'lucide:archive'
+      }
+    ]
   }
 ]
 
 const accountLinks = [
   {
     title: 'Profile',
-    to: '/profile',
     icon: 'lucide:user'
   },
   {
     title: 'Settings',
-    to: '/settings',
     icon: 'lucide:settings'
   },
   {
     title: 'Sign out',
-    to: '/signout',
     icon: 'lucide:log-out'
   }
 ]
@@ -64,11 +76,11 @@ const accountLinks = [
 
     <nav class="relative flex h-full flex-col justify-between gap-2">
       <div>
-        <SideBarLinks :links="links" />
+        <SideBarLinks :routes="links" />
       </div>
 
       <div class="border-y bg-background py-3 text-center">
-        <SideBarLinks :links="accountLinks" />
+        <SideBarLinks :routes="accountLinks" />
       </div>
     </nav>
   </aside>
