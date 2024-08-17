@@ -1,7 +1,7 @@
 import type { Product } from './product'
 
 export type ProductVariety = {
-  id: number
+  id?: number
   name: string
   product: Product
 }

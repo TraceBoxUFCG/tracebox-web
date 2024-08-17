@@ -8,16 +8,16 @@ export enum PurchaseOrderStatusEnum {
   LOTTED = 'LOTTED'
 }
 export interface PurchaseOrder {
+  id?: number
   expected_arrival_date: string
   status: PurchaseOrderStatusEnum
-  id: number
   supplier: Supplier
   items: PurchaseOrderItem[]
 }
 
 export interface PurchaseOrderItem {
+  id?: number
   boxes_quantity: number
   unit_price: number
-  id: number
   product_variety: ProductVariety
 }
