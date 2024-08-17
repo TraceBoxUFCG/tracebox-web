@@ -101,8 +101,8 @@ watch(pageIndex, () => {
     :data="purchaseOrderStore.purchaseOrdersResponse"
   >
     <template v-slot:search>
-      <DatePicker v-model="expectedArrivalDate" />
-      <StatusSelect class="w-[300px]" v-model="status" />
+      <DatePicker class="w-[200px]" v-model="expectedArrivalDate" />
+      <StatusSelect class="w-[200px]" v-model="status" />
       <Button @click="searchWithoutDebounce">
         <iconify-icon lass="mr-3 size-4" icon="lucide:search" />
         Buscar

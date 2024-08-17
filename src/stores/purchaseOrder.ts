@@ -18,7 +18,7 @@ export const usePurchaseOrderStore = defineStore('purchase-order-store', {
           params: {
             q: q,
             page: page,
-            expected_arrival_date: expected_arrival_date,
+            expected_arrival_date: expected_arrival_date?.toISOString().split('T')[0],
             status: status
           }
         })

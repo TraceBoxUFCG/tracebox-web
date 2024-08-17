@@ -1,12 +1,26 @@
 <script setup lang="ts">
 import { DateFormatter, type DateValue, getLocalTimeZone } from '@internationalized/date'
 import { cn } from '@/lib/utils'
+import { useForwardPropsEmits, type CalendarRootEmits, type CalendarRootProps } from 'radix-vue'
+import type { HTMLAttributes } from 'vue'
 
 const model = defineModel<DateValue>()
 
 const df = new DateFormatter('pt-br', {
   dateStyle: 'long'
 })
+
+const props = defineProps<CalendarRootProps & { class?: HTMLAttributes['class'] }>()
+
+const emits = defineEmits<CalendarRootEmits>()
+
+const delegatedProps = computed(() => {
+  const { class: _, ...delegated } = props
+
+  return delegated
+})
+
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
@@ -15,7 +29,11 @@ const df = new DateFormatter('pt-br', {
       <Button
         variant="outline"
         :class="
-          cn('w-[300px] justify-start text-left font-normal', !model && 'text-muted-foreground')
+          cn(
+            'w-auto justify-start text-left font-normal',
+            !model && 'text-muted-foreground',
+            props.class
+          )
         "
       >
         <iconify-icon lass="mr-3 size-4" icon="lucide:calendar"></iconify-icon>
@@ -23,7 +41,7 @@ const df = new DateFormatter('pt-br', {
       </Button>
     </PopoverTrigger>
     <PopoverContent class="w-auto p-0">
-      <Calendar v-model="model" initial-focus />
+      <Calendar v-bind="forwarded" initial-focus />
     </PopoverContent>
   </Popover>
 </template>

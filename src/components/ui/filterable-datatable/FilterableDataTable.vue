@@ -37,11 +37,11 @@ const onInputChange = (input: string | number) => {
 <template>
   <div class="flex flex-col gap-5 px-5">
     <div class="flex items-center justify-between">
-      <div class="flex flex-row gap-1">
+      <div class="flex flex-row gap-3">
         <Input
           v-on:update:model-value="onInputChange"
           :model-value="searchInput"
-          class="w-[350px]"
+          class="w-[300px]"
           :placeholder="placeholder"
         />
         <slot name="search" />
