@@ -42,6 +42,11 @@ const links = [
         title: 'Ordens de Compra',
         to: '/purchases/purchase_order',
         icon: 'lucide:archive'
+      },
+      {
+        title: 'Criar Ordem de Compra',
+        to: '/purchases/new/',
+        icon: 'lucide:notebook-pen'
       }
     ]
   }
@@ -65,7 +70,7 @@ const accountLinks = [
 
 <template>
   <aside
-    class="fixed flex h-screen w-16 flex-col gap-2 border-r bg-muted/40 transition-[width] lg:w-52"
+    class="fixed flex h-screen w-16 flex-col gap-2 border-r bg-muted/40 transition-[width] lg:w-60"
   >
     <RouterLink
       to="/ "
