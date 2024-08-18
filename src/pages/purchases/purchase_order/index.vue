@@ -3,13 +3,19 @@ import PurchaseOrderDataTable from '@/components/purchaseOrder/PurchaseOrderData
 
 const pageStore = usePageStore()
 pageStore.title = 'Ordem de Compra'
+
+const purchaseOrderStore = usePurchaseOrderStore()
+
+purchaseOrderStore.fill()
 </script>
 
 <template>
   <PurchaseOrderDataTable>
     <Button>
-      <iconify-icon lass="mr-3 size-4" icon="lucide:plus" />
-      Criar pedido de compra
+      <RouterLink to="/purchases/new">
+        <iconify-icon lass="mr-3 size-4" icon="lucide:plus" />
+        Criar pedido de compra
+      </RouterLink>
     </Button>
   </PurchaseOrderDataTable>
 </template>

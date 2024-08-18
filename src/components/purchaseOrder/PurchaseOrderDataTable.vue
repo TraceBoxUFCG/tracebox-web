@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PurchaseOrderStatusEnum } from '@/types/purchaseOrder'
-import { type DateValue, getLocalTimeZone } from '@internationalized/date'
+import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { debounce } from 'lodash'
 import { RouterLink } from 'vue-router'
@@ -83,6 +83,10 @@ const searchWithoutDebounce = () => {
     status.value
   )
 }
+;(() => {
+  expectedArrivalDate.value = today(getLocalTimeZone())
+})()
+
 watch(searchInput, () => {
   searchWithDebounce()
 })

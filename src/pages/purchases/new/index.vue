@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import router from '@/router'
+
 const purchaseOrderCartStore = usePurchaseOrderCart()
+
+const placeOrder = async () => {
+  await purchaseOrderCartStore.place()
+  router.push({ path: '/purchases/purchase_order' })
+}
 </script>
 
 <template>
@@ -7,7 +14,7 @@ const purchaseOrderCartStore = usePurchaseOrderCart()
     <PurchaseOrderCartForm />
     <PurchaseOrderItemsCartDataTable />
     <div class="flex justify-end">
-      <Button @click="purchaseOrderCartStore.place()">
+      <Button @click="placeOrder">
         <iconify-icon lass="mr-3 size-4" icon="lucide:plus" />
         Criar Ordem de Compra
       </Button>

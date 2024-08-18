@@ -1,3 +1,5 @@
+import { getLocalTimeZone, today } from '@internationalized/date'
+
 export const usePurchaseOrderStore = defineStore('purchase-order-store', {
   state: () => {
     return {
@@ -20,6 +22,20 @@ export const usePurchaseOrderStore = defineStore('purchase-order-store', {
             page: page,
             expected_arrival_date: expected_arrival_date?.toISOString().split('T')[0],
             status: status
+          }
+        })
+      ).data
+      this.purchaseOrders = response.items
+      this.purchaseOrdersResponse = response
+    },
+    async fill() {
+      const response: PaginatedResponse<PurchaseOrder> = (
+        await this.axios.get('/purchaes/purchase_order', {
+          params: {
+            expected_arrival_date: today(getLocalTimeZone())
+              .toDate(getLocalTimeZone())
+              ?.toISOString()
+              .split('T')[0]
           }
         })
       ).data
