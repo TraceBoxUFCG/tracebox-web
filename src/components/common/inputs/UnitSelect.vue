@@ -27,7 +27,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 
 <template>
   <Select v-bind="forwarded">
-    <SelectTrigger class="w-auto">
+    <SelectTrigger>
       <SelectValue placeholder="Selecione uma unidade" />
     </SelectTrigger>
     <SelectContent>

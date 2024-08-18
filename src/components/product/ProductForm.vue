@@ -72,7 +72,6 @@ const steps = [
         <FormField v-slot="{ componentField }" name="packaging.quantity">
           <FormItem>
             <FormLabel>Quantidade que cabe na caixa</FormLabel>
-
             <FormControl>
               <CustomNumberInput
                 :min="0"
