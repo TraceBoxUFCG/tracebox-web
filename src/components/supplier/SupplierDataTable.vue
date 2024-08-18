@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CommonDropdownMenu from '@/components/layout/main/CommonDropdownMenu.vue'
+import CommonDropdownMenu from '@/components/common/CommonDropdownMenu.vue'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { debounce } from 'lodash'
 import { RouterLink } from 'vue-router'

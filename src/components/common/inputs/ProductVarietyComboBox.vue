@@ -8,7 +8,7 @@ import type { AxiosInstance } from 'axios'
 
 const axios = inject<AxiosInstance>('axios') as AxiosInstance
 const open = ref(false)
-const selectedVariety = ref<ProductVariety>()
+const selectedVariety = defineModel<ProductVariety>('variety', { required: true })
 const providedVarieties = ref<ProductVariety[]>([])
 
 ;(async () => {

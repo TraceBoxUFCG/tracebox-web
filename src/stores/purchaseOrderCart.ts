@@ -1,23 +1,36 @@
-import { useLocalStorage, type RemovableRef } from '@vueuse/core'
 import { filter } from 'lodash'
 
 export const usePurchaseOrderCart = defineStore('purchase-order-cart-store', {
   state: () => {
     return {
-      supplier: useLocalStorage('PurchaseOrderCart:supplier', undefined) as RemovableRef<Supplier>,
-      expectedArrivalDate: useLocalStorage(
-        'PurchaseOrderCart:expectedArrivalDate',
-        undefined
-      ) as unknown as RemovableRef<Date>,
-      items: useLocalStorage('PurchaseOrderCart:items', []) as RemovableRef<PurchaseOrderItem[]>
+      supplier: {} as Supplier,
+      expectedArrivalDate: {} as Date,
+      items: [] as PurchaseOrderItem
     }
   },
+
   actions: {
-    addItem() {},
-    clearItem(name: string) {
-      this.items = filter(this.items, (item) => item.name !== name)
+    addItem(productVariety: ProductVariety, boxesQuantity: number, unitPrice: number) {
+      const actualItems = [...this.items]
+      actualItems.push({
+        boxes_quantity: boxesQuantity,
+        unit_price: unitPrice,
+        product_variety: productVariety
+      })
+
+      this.items = actualItems
     },
-    setItemCount(item: string, count: number) {},
+    setSupplier(supplier: Supplier) {
+      this.supplier = supplier
+    },
+    setExpectedArrivalDate(expectedArrivalDate: Date) {
+      this.expectedArrivalDate = expectedArrivalDate
+    },
+    clearItem(index: number) {
+      const actualItems = [...this.items]
+      actualItems.splice(index, 1)
+      this.items = actualItems
+    },
     place() {
       this.$reset()
     }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
-import CommonDropdownMenu from '@/components/layout/main/CommonDropdownMenu.vue'
+import CommonDropdownMenu from '@/components/common/CommonDropdownMenu.vue'
 import { debounce } from 'lodash'
 
 const props = defineProps<{

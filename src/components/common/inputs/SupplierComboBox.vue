@@ -8,7 +8,7 @@ import type { AxiosInstance } from 'axios'
 
 const axios = inject<AxiosInstance>('axios') as AxiosInstance
 const open = ref(false)
-const selectedSupplier = ref<Supplier>()
+const selectedSupplier = defineModel<Supplier>('supplier', { required: true })
 const providedSuppliers = ref<Supplier[]>([])
 
 ;(async () => {
@@ -57,8 +57,7 @@ const onInputChange = debounce(async (e: InputEvent) => {
         :aria-expanded="open"
         class="w-full justify-between"
       >
-        {{ selectedSupplier ? selectedSupplier.business_name : 'Selecione o produto' }}
-
+        {{ selectedSupplier ? selectedSupplier.business_name : 'Selecione o fornecedor' }}
         <ChevronsUpDown class="ml-2 size-4 shrink-0 opacity-50" />
       </Button>
     </PopoverTrigger>

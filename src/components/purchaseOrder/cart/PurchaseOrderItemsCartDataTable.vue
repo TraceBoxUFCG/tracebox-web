@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ColumnDef } from '@tanstack/vue-table'
+import PurchaseOrderItemCartDropDownMenu from '@/components/purchaseOrder/cart/PurchaseOrderItemCartDropDownMenu.vue'
 
 const purchaseOrderCartStore = usePurchaseOrderCart()
 
@@ -19,8 +20,15 @@ const columns: ColumnDef<PurchaseOrderItem>[] = [
       return h(
         'div',
         { to: '', class: 'text-left font-medium' },
-        row.original.productVariety.product.name
+        row.original.product_variety.product.name
       )
+    }
+  },
+  {
+    accessorKey: 'variety',
+    header: () => h('div', { class: 'text-left' }, 'Variedade'),
+    cell: ({ row }) => {
+      return h('div', { to: '', class: 'text-left font-medium' }, row.original.product_variety.name)
     }
   },
   {
@@ -34,7 +42,21 @@ const columns: ColumnDef<PurchaseOrderItem>[] = [
     accessorKey: 'unit_price',
     header: () => h('div', { class: 'text-left' }, 'Preço da caixa'),
     cell: ({ row }) => {
-      return h('div', { to: '', class: 'text-left font-medium' }, row.original.unit_price)
+      const formatedPrice = `R$ ${row.original.unit_price}`
+      return h('div', { to: '', class: 'text-left font-medium' }, formatedPrice)
+    }
+  },
+  {
+    id: 'actions',
+    enableHiding: false,
+    cell: ({ row }) => {
+      return h(
+        'div',
+        { class: 'relative' },
+        h(PurchaseOrderItemCartDropDownMenu, {
+          onClickRemove: () => purchaseOrderCartStore.clearItem(row.index)
+        })
+      )
     }
   }
 ]
