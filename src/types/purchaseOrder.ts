@@ -21,3 +21,18 @@ export interface PurchaseOrderItem {
   unit_price: number
   product_variety: ProductVariety
 }
+
+export interface PurchaseOrderItemCart {
+  id?: number
+  purchase_order_id?: number
+  boxes_quantity: number
+  unit_price: number
+  product_variety_id: number
+}
+
+export interface PurchaseOrderCart {
+  id?: number
+  expected_arrival_date: Date
+  supplier_id: number
+  items: PurchaseOrderItemCart[]
+}

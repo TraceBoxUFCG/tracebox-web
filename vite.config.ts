@@ -42,7 +42,9 @@ export default defineConfig({
             'GenerateAssetTagPayload',
             'ProductVariety',
             'PurchaseOrder',
-            'PurchaseOrderItem'
+            'PurchaseOrderItem',
+            'PurchaseOrderCart',
+            'PurchaseOrderItemCart'
           ],
           type: true
         }

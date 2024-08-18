@@ -1,9 +1,16 @@
 <script setup lang="ts">
-const pageStore = usePageStore()
-pageStore.title = 'Nova Ordem de Compra'
+const purchaseOrderCartStore = usePurchaseOrderCart()
 </script>
 
 <template>
-  <PurchaseOrderCartForm />
-  <PurchaseOrderItemsCartDataTable />
+  <div class="flex flex-col gap-5">
+    <PurchaseOrderCartForm />
+    <PurchaseOrderItemsCartDataTable />
+    <div class="flex justify-end">
+      <Button @click="purchaseOrderCartStore.place()">
+        <iconify-icon lass="mr-3 size-4" icon="lucide:plus" />
+        Criar Ordem de Compra
+      </Button>
+    </div>
+  </div>
 </template>

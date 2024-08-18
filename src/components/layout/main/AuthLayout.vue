@@ -8,8 +8,10 @@ const pageStore = usePageStore()
     <TopNavbar />
 
     <main class="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-      <div class="flex items-center">
-        <h1 class="text-lg font-semibold md:text-2xl">{{ pageStore.title }}</h1>
+      <div v-if="pageStore.title" class="flex items-center">
+        <h1 class="text-lg font-semibold md:text-2xl">
+          {{ pageStore.title }}
+        </h1>
       </div>
       <slot />
     </main>

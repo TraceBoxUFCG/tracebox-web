@@ -62,7 +62,10 @@ watch(selectedSupplier, () => {
       </div>
     </CardContent>
     <CardFooter class="flex items-end justify-end gap-10 px-6 pb-6">
-      <Button @click="addItemToCart">Adicionar item</Button>
+      <Button @click="addItemToCart">
+        <iconify-icon lass="mr-3 size-4" icon="lucide:plus" />
+        Adicionar item
+      </Button>
     </CardFooter>
   </Card>
 </template>
