@@ -5,7 +5,6 @@ import { ChevronsUpDown } from 'lucide-vue-next'
 import { debounce } from 'lodash'
 
 import type { AxiosInstance } from 'axios'
-import { cn } from '@/lib/utils'
 
 const axios = inject<AxiosInstance>('axios') as AxiosInstance
 const open = ref(false)
