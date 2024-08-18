@@ -30,7 +30,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
         variant="outline"
         :class="
           cn(
-            'w-auto justify-start text-left font-normal',
+            'w-full justify-start text-left font-normal',
             !model && 'text-muted-foreground',
             props.class
           )

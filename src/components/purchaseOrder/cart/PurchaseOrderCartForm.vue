@@ -14,6 +14,8 @@ const boxesQuantity = ref<number>()
     <CardContent>
       <DatePicker v-model="expectedArrivalDate" />
       <CustomNumberInput v-model:model-value="boxesQuantity" />
+      <SupplierComboBox />
+      <ProductVarietyComboBox />
     </CardContent>
     <CardFooter class="flex justify-between px-6 pb-6">
       <Button>Adicionar item</Button>
