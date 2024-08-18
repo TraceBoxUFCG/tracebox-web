@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import router from '@/router'
 
+const pageStore = usePageStore()
+pageStore.title = ''
 const purchaseOrderCartStore = usePurchaseOrderCart()
 
 const placeOrder = async () => {
