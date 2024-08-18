@@ -35,15 +35,7 @@ const steps = [
         <FormField v-slot="{ componentField }" name="quantity">
           <FormItem>
             <FormLabel>Quantidade de Assets</FormLabel>
-            <NumberField class="gap-2" :min="1" :default-value="1" v-bind="componentField">
-              <NumberFieldContent>
-                <NumberFieldDecrement />
-                <FormControl>
-                  <NumberFieldInput />
-                </FormControl>
-                <NumberFieldIncrement />
-              </NumberFieldContent>
-            </NumberField>
+            <CustomNumberInput class="gap-2" :min="1" :default-value="1" v-bind="componentField" />
             <FormMessage />
           </FormItem>
         </FormField>
