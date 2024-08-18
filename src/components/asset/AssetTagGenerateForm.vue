@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { UnitEnum } from '@/types/common'
 
 defineProps<{
