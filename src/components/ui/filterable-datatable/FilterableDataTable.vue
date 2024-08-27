@@ -1,44 +1,52 @@
 <script setup lang="ts" generic="TData, TValue">
 import type { ColumnDef } from '@tanstack/vue-table'
 import { Pagination, PaginationList, PaginationListItem } from '@/components/ui/pagination'
-
-import { debounce } from 'lodash'
+import { get, set } from '@vueuse/core'
 
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
   data: PaginatedResponse
-  placeholder?: string
-  onSearch: (input: string, page: number) => void
+  placeholder: string
 }>()
 
-const searchInput = ref('')
-const currentPage = ref(1)
+const searchInput = defineModel<string>('searchInput', { required: true })
+const pageIndex = defineModel<number>('pageIndex', { required: true })
 
-const searchWithDebounce = debounce(() => {
-  props.onSearch(searchInput.value, currentPage.value)
-}, 1000)
+const canGoNext = computed(() => props.data.items.length < pageIndex.value)
+const canGoBack = computed(() => props.data.items.length > 1)
 
-const searchWithoutDebouce = () => {
-  props.onSearch(searchInput.value, currentPage.value)
+const goNext = () => {
+  if (get(canGoNext)) {
+    set(pageIndex, pageIndex.value + 1)
+  }
+}
+const goBack = () => {
+  if (get(canGoBack)) {
+    set(pageIndex, pageIndex.value - 1)
+  }
+}
+const setPage = (selectedPage: number) => {
+  set(pageIndex, selectedPage)
+}
+
+const onInputChange = (input: string | number) => {
+  set(searchInput, String(input))
 }
 </script>
 
 <template>
   <div class="flex flex-col gap-5 px-5">
     <div class="flex items-center justify-between">
-      <Input
-        :onchange="searchWithDebounce"
-        :model-value="searchInput"
-        @update:model-value="
-          (input) => {
-            searchInput = String(input)
-            searchWithDebounce()
-          }
-        "
-        class="max-w-sm"
-        :placeholder="placeholder"
-      />
-      <slot />
+      <div class="flex flex-row gap-3">
+        <Input
+          v-on:update:model-value="onInputChange"
+          :model-value="searchInput"
+          class="w-[300px]"
+          :placeholder="placeholder"
+        />
+        <slot name="search" />
+      </div>
+      <slot name="action" />
     </div>
     <div class="flex w-full flex-col items-center justify-center gap-5">
       <DataTable
@@ -49,15 +57,15 @@ const searchWithoutDebouce = () => {
       />
       <Pagination
         v-slot="{ page }"
+        v-if="props.data.items"
         :total="props.data.total"
         :sibling-count="1"
         show-edges
-        :default-page="currentPage"
+        :default-page="1"
         class="flex w-full items-center justify-center"
       >
         <PaginationList v-slot="{ items }" class="flex items-center gap-1">
-          <PaginationFirst />
-          <PaginationPrev />
+          <PaginationPrev :onclick="goBack" />
 
           <template v-for="(item, index) in items">
             <PaginationListItem
@@ -67,12 +75,9 @@ const searchWithoutDebouce = () => {
               as-child
             >
               <Button
-                :onclick="
+                :click="
                   () => {
-                    if (currentPage !== item.value) {
-                      currentPage = item.value
-                      searchWithoutDebouce()
-                    }
+                    setPage(item.value)
                   }
                 "
                 class="size-10 p-0"
@@ -84,26 +89,7 @@ const searchWithoutDebouce = () => {
             <PaginationEllipsis v-else :key="item.type" :index="index" />
           </template>
 
-          <PaginationNext
-            :onclick="
-              () => {
-                if (items.length < currentPage) {
-                  currentPage = currentPage + 1
-                  searchWithoutDebouce()
-                }
-              }
-            "
-          />
-          <PaginationLast
-            :onclick="
-              () => {
-                if (items.length > 1) {
-                  currentPage = currentPage + 1
-                  searchWithoutDebouce()
-                }
-              }
-            "
-          />
+          <PaginationNext :onclick="goNext" />
         </PaginationList>
       </Pagination>
     </div>

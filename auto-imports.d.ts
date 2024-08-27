@@ -14,6 +14,7 @@ declare global {
   const PaginatedResponse: typeof import('@/types')['PaginatedResponse']
   const Product: typeof import('@/types')['Product']
   const ProductVariety: typeof import('@/types')['ProductVariety']
+  const PurchaseOrderStatusEnum: typeof import('./src/types/purchaseOrder')['PurchaseOrderStatusEnum']
   const StatesEnum: typeof import('./src/types/common')['StatesEnum']
   const StatusEnum: typeof import('./src/types/assets')['StatusEnum']
   const Supplier: typeof import('@/types')['Supplier']
@@ -73,7 +74,7 @@ declare global {
   const unref: typeof import('vue')['unref']
   const useAssetStore: typeof import('./src/stores/assets')['useAssetStore']
   const useAttrs: typeof import('vue')['useAttrs']
-  const useCartStore: typeof import('./src/stores/supplier')['useCartStore']
+  const useCartStore: typeof import('./src/stores/purchaseOrderCart')['useCartStore']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useForm: typeof import('vee-validate')['useForm']
@@ -82,6 +83,8 @@ declare global {
   const usePageStore: typeof import('./src/stores/page')['usePageStore']
   const useProductStore: typeof import('./src/stores/product')['useProductStore']
   const useProductVarietyStore: typeof import('./src/stores/productVariety')['useProductVarietyStore']
+  const usePurchaseOrderCart: typeof import('./src/stores/purchaseOrderCart')['usePurchaseOrderCart']
+  const usePurchaseOrderStore: typeof import('./src/stores/purchaseOrder')['usePurchaseOrderStore']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
@@ -100,7 +103,7 @@ declare global {
   export type { Component, ComponentPublicInstance, ComputedRef, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { Supplier, Address, PaginatedResponse, Product, Packaging, Asset, GenerateAssetTagPayload, ProductVariety } from '@/types'
+  export type { Supplier, Address, PaginatedResponse, Product, Packaging, Asset, GenerateAssetTagPayload, ProductVariety, PurchaseOrder, PurchaseOrderItem, PurchaseOrderCart, PurchaseOrderItemCart } from '@/types'
   import('@/types')
   // @ts-ignore
   export type { AssetStatusEnum } from './src/types/assets'
@@ -108,4 +111,7 @@ declare global {
   // @ts-ignore
   export type { UnitEnum, StatesEnum } from './src/types/common'
   import('./src/types/common')
+  // @ts-ignore
+  export type { PurchaseOrderStatusEnum } from './src/types/purchaseOrder'
+  import('./src/types/purchaseOrder')
 }

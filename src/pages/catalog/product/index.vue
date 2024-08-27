@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ProductDataTable from '@/components/ProductDataTable.vue'
+import ProductDataTable from '@/components/product/ProductDataTable.vue'
 const pageStore = usePageStore()
 pageStore.title = 'Catálogo'
 

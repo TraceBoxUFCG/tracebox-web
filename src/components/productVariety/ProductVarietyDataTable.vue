@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import CommonDropdownMenu from '@/components/layout/CommonDropdownMenu.vue'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
-
-const productStore = useProductStore()
+import CommonDropdownMenu from '@/components/common/CommonDropdownMenu.vue'
+import { debounce } from 'lodash'
 
 const props = defineProps<{
   onClickDelete: (object: any) => void
 }>()
 
-const columns: ColumnDef<Product>[] = [
+const productVarietyStore = useProductVarietyStore()
+
+const columns: ColumnDef<ProductVariety>[] = [
   {
     accessorKey: 'id',
     header: () => h('div', { class: 'text-left' }, 'Id'),
@@ -17,7 +18,7 @@ const columns: ColumnDef<Product>[] = [
       return h(
         RouterLink,
         {
-          to: `/product/${row.original.id}`,
+          to: `/catalog/product/variety${row.original.id}`,
           class: 'text-left font-medium hover:bg-muted block w-full'
         },
         () => row.original.id
@@ -25,28 +26,17 @@ const columns: ColumnDef<Product>[] = [
     }
   },
   {
-    accessorKey: 'name',
+    accessorKey: 'Variedade',
     header: () => h('div', { class: 'text-left' }, 'Nome'),
     cell: ({ row }) => {
       return h('div', { to: '', class: 'text-left font-medium' }, row.original.name)
     }
   },
   {
-    accessorKey: 'average_unit_weight',
-    header: () => h('div', { class: 'text-left' }, 'Peso médio'),
+    accessorKey: 'product',
+    header: () => h('div', { class: 'text-left' }, 'Produto'),
     cell: ({ row }) => {
-      return h('div', { to: '', class: 'text-left font-medium' }, row.original.average_unit_weight)
-    }
-  },
-  {
-    accessorKey: 'packaging',
-    header: () => h('div', { class: 'text-left' }, 'Empacotamento de Recebimento'),
-    cell: ({ row }) => {
-      return h(
-        'div',
-        { to: '', class: 'text-left font-medium' },
-        row.original.packaging.description
-      )
+      return h('div', { to: '', class: 'text-left font-medium' }, row.original.product.name)
     }
   },
   {
@@ -67,18 +57,36 @@ const columns: ColumnDef<Product>[] = [
   }
 ]
 
-const onSearch = async (input: string, page: number) => {
-  await productStore.search(input, page)
+const pageIndex = ref(1)
+const searchInput = ref('')
+
+const searchWithDebounce = debounce(() => {
+  productVarietyStore.search(searchInput.value, pageIndex.value)
+}, 1000)
+
+const searchWithoutDebounce = () => {
+  productVarietyStore.search(searchInput.value, pageIndex.value)
 }
+
+watch(searchInput, () => {
+  searchWithDebounce()
+})
+
+watch(pageIndex, () => {
+  searchWithoutDebounce()
+})
 </script>
 
 <template>
   <FilterableDataTable
-    :on-search="onSearch"
-    placeholder="Filtre os Produtos"
+    v-model:search-input="searchInput"
+    v-model:page-index="pageIndex"
+    placeholder="Filtre as variedades de produto"
     :columns="columns"
-    :data="productStore.productsResponse"
+    :data="productVarietyStore.productVarietiesResponse"
   >
-    <slot />
+    <template v-slot:action>
+      <slot />
+    </template>
   </FilterableDataTable>
 </template>

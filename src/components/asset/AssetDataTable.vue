@@ -2,7 +2,8 @@
 import { AssetStatusEnum } from '@/types/assets'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
-import AssetDropDownMenu from './layout/AssetDropDownMenu.vue'
+import { debounce } from 'lodash'
+import AssetDropDownMenu from './AssetDropDownMenu.vue'
 
 const assetStore = useAssetStore()
 
@@ -63,25 +64,42 @@ const columns: ColumnDef<Asset>[] = [
         { class: 'relative' },
         h(AssetDropDownMenu, {
           id: asset.id,
-          onClickDownload: () => () => {}
+          onClickDownload: () => assetStore.getTagById(asset.id)
         })
       )
     }
   }
 ]
+const pageIndex = ref(1)
+const searchInput = ref('')
 
-const onSearch = async (input: string, page: number) => {
-  await assetStore.search(input, page)
+const searchWithDebounce = debounce(() => {
+  assetStore.search(searchInput.value, pageIndex.value)
+}, 1000)
+
+const searchWithoutDebounce = () => {
+  assetStore.search(searchInput.value, pageIndex.value)
 }
+
+watch(searchInput, () => {
+  searchWithDebounce()
+})
+
+watch(pageIndex, () => {
+  searchWithoutDebounce()
+})
 </script>
 
 <template>
   <FilterableDataTable
-    :on-search="onSearch"
+    v-model:search-input="searchInput"
+    v-model:page-index="pageIndex"
     placeholder="Filtre os assets"
     :columns="columns"
     :data="assetStore.assetsResponse"
   >
-    <slot />
+    <template v-slot:action>
+      <slot />
+    </template>
   </FilterableDataTable>
 </template>

@@ -54,24 +54,15 @@ const steps = [
         <FormField v-slot="{ componentField }" name="average_unit_weight">
           <FormItem>
             <FormLabel>Peso Médio</FormLabel>
-            <NumberField
-              class="gap-2"
+            <CustomNumberInput
               :min="0"
               :default-value="0.1"
               :format-options="{
                 signDisplay: 'exceptZero',
-                minimumFractionDigits: 2
+                minimumFractionDigits: 1
               }"
               v-bind="componentField"
-            >
-              <NumberFieldContent>
-                <NumberFieldDecrement />
-                <FormControl>
-                  <NumberFieldInput />
-                </FormControl>
-                <NumberFieldIncrement />
-              </NumberFieldContent>
-            </NumberField>
+            />
             <FormMessage />
           </FormItem>
         </FormField>
@@ -81,24 +72,17 @@ const steps = [
         <FormField v-slot="{ componentField }" name="packaging.quantity">
           <FormItem>
             <FormLabel>Quantidade que cabe na caixa</FormLabel>
-            <NumberField
-              class="gap-2"
-              :min="0"
-              :default-value="0.1"
-              :format-options="{
-                signDisplay: 'exceptZero',
-                minimumFractionDigits: 1
-              }"
-              v-bind="componentField"
-            >
-              <NumberFieldContent>
-                <NumberFieldDecrement />
-                <FormControl>
-                  <NumberFieldInput />
-                </FormControl>
-                <NumberFieldIncrement />
-              </NumberFieldContent>
-            </NumberField>
+            <FormControl>
+              <CustomNumberInput
+                :min="0"
+                :default-value="0.1"
+                :format-options="{
+                  signDisplay: 'exceptZero',
+                  minimumFractionDigits: 1
+                }"
+                v-bind="componentField"
+              />
+            </FormControl>
             <FormMessage />
           </FormItem>
         </FormField>
@@ -106,19 +90,7 @@ const steps = [
           <FormItem v-auto-animate>
             <FormLabel>Unidade</FormLabel>
             <FormControl>
-              <Select v-bind="componentField">
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecione a unidade do empacotamento" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Unidade</SelectLabel>
-                    <SelectItem v-for="unit of UnitEnum" :key="unit" :value="unit">
-                      {{ unit }}
-                    </SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              <UnitSelect v-bind="componentField" />
             </FormControl>
             <FormMessage />
           </FormItem>
