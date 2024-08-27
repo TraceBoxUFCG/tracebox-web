@@ -130,6 +130,7 @@ declare module 'vue' {
     PurcharOrderCartForm: typeof import('./src/components/PurchaseOrderCartForm.vue')['default']
     PurchaseOrderCartForm: typeof import('./src/components/purchaseOrder/cart/PurchaseOrderCartForm.vue')['default']
     PurchaseOrderDataTable: typeof import('./src/components/purchaseOrder/PurchaseOrderDataTable.vue')['default']
+    PurchaseOrderDropDownMenu: typeof import('./src/components/purchaseOrder/PurchaseOrderDropDownMenu.vue')['default']
     PurchaseOrderItemCartDropDownMenu: typeof import('./src/components/purchaseOrder/cart/PurchaseOrderItemCartDropDownMenu.vue')['default']
     PurchaseOrderItemsCartDataTable: typeof import('./src/components/purchaseOrder/cart/PurchaseOrderItemsCartDataTable.vue')['default']
     RadioGroup: typeof import('./src/components/ui/radio-group/RadioGroup.vue')['default']

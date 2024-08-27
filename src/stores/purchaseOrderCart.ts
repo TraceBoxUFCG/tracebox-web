@@ -48,7 +48,7 @@ export const usePurchaseOrderCart = defineStore('purchase-order-cart-store', {
           })
         }
         const response: PurchaseOrder = (
-          await this.axios.post('/purchaes/purchase_order/place', payload)
+          await this.axios.post('/purchases/purchase_order/place', payload)
         ).data
         toast({
           title: 'Ordem de compra criada com sucesso',

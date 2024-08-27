@@ -5,6 +5,7 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { debounce } from 'lodash'
 import { RouterLink } from 'vue-router'
 import StatusSelect from '../common/inputs/StatusSelect.vue'
+import PurchaseOrderDropDownMenu from './PurchaseOrderDropDownMenu.vue'
 
 const purchaseOrderStore = usePurchaseOrderStore()
 
@@ -57,6 +58,22 @@ const columns: ColumnDef<PurchaseOrder>[] = [
     header: () => h('div', { class: 'text-left' }, 'Quantidade de Items'),
     cell: ({ row }) => {
       return h('div', { to: '', class: 'text-left font-medium' }, row.original.items.length)
+    }
+  },
+  {
+    id: 'actions',
+    enableHiding: false,
+    cell: ({ row }) => {
+      const asset = row.original
+
+      return h(
+        'div',
+        { class: 'relative' },
+        h(PurchaseOrderDropDownMenu, {
+          id: asset.id,
+          onClickDownload: () => purchaseOrderStore.confirm(asset.id)
+        })
+      )
     }
   }
 ]

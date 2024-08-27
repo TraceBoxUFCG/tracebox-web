@@ -1,3 +1,4 @@
+import { toast } from '@/components/ui/toast'
 import { getLocalTimeZone, today } from '@internationalized/date'
 
 export const usePurchaseOrderStore = defineStore('purchase-order-store', {
@@ -16,7 +17,7 @@ export const usePurchaseOrderStore = defineStore('purchase-order-store', {
       status?: PurchaseOrderStatusEnum
     ) {
       const response: PaginatedResponse<PurchaseOrder> = (
-        await this.axios.get('/purchaes/purchase_order', {
+        await this.axios.get('/purchases/purchase_order', {
           params: {
             q: q,
             page: page,
@@ -30,7 +31,7 @@ export const usePurchaseOrderStore = defineStore('purchase-order-store', {
     },
     async fill() {
       const response: PaginatedResponse<PurchaseOrder> = (
-        await this.axios.get('/purchaes/purchase_order', {
+        await this.axios.get('/purchases/purchase_order', {
           params: {
             expected_arrival_date: today(getLocalTimeZone())
               .toDate(getLocalTimeZone())
@@ -41,6 +42,21 @@ export const usePurchaseOrderStore = defineStore('purchase-order-store', {
       ).data
       this.purchaseOrders = response.items
       this.purchaseOrdersResponse = response
+    },
+    async confirm(id: number) {
+      try {
+        await this.axios.post(`/purchases/purchase_order/${id}/confirm`)
+        await this.search(1, String(id))
+      } catch {
+        toast({
+          title: 'Falha na tentativa de confirmar ordem de compra.',
+          description: `Não foi possivel confirmar a ordem de compra`,
+          variant: 'destructive'
+        })
+      }
+      toast({
+        title: 'Ordem de Compra confirmada com sucesso!'
+      })
     }
   }
 })

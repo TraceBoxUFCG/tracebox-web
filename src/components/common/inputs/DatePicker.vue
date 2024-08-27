@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DateFormatter, type DateValue, getLocalTimeZone, today } from '@internationalized/date'
+import { DateFormatter, type DateValue, getLocalTimeZone } from '@internationalized/date'
 import { cn } from '@/lib/utils'
 import { useForwardPropsEmits, type CalendarRootEmits, type CalendarRootProps } from 'radix-vue'
 import type { HTMLAttributes } from 'vue'
