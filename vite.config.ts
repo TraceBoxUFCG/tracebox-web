@@ -31,7 +31,7 @@ export default defineConfig({
           zod: ['z']
         },
         {
-          from: '@/types',
+          from: '@/types/',
           imports: [
             'Supplier',
             'Address',

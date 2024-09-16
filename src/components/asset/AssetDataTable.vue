@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { AssetStatusEnum } from '@/types/assets'
 import type { ColumnDef } from '@tanstack/vue-table'
-import { RouterLink } from 'vue-router'
 import { debounce } from 'lodash'
 import AssetDropDownMenu from './AssetDropDownMenu.vue'
+import type { Asset } from '@/types/assets'
 
 const assetStore = useAssetStore()
 
@@ -18,14 +18,7 @@ const columns: ColumnDef<Asset>[] = [
     accessorKey: 'id',
     header: () => h('div', { class: 'text-left' }, 'Id'),
     cell: ({ row }) => {
-      return h(
-        RouterLink,
-        {
-          to: `/assets/${row.original.id}`,
-          class: 'text-left font-medium hover:bg-muted block w-full'
-        },
-        () => row.original.id
-      )
+      return h('div', { to: '', class: 'text-left font-medium' }, row.original.id)
     }
   },
   {
@@ -63,8 +56,8 @@ const columns: ColumnDef<Asset>[] = [
         'div',
         { class: 'relative' },
         h(AssetDropDownMenu, {
-          id: asset.id,
-          onClickDownload: () => assetStore.getTagById(asset.id)
+          id: asset.id as number,
+          onClickDownload: () => assetStore.getTagById(asset.id as number)
         })
       )
     }

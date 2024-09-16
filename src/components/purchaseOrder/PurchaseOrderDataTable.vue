@@ -3,9 +3,9 @@ import { PurchaseOrderStatusEnum } from '@/types/purchaseOrder'
 import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { debounce } from 'lodash'
-import { RouterLink } from 'vue-router'
 import StatusSelect from '../common/inputs/StatusSelect.vue'
 import PurchaseOrderDropDownMenu from './PurchaseOrderDropDownMenu.vue'
+import type { PurchaseOrder } from '@/types/purchaseOrder'
 
 const purchaseOrderStore = usePurchaseOrderStore()
 
@@ -14,14 +14,7 @@ const columns: ColumnDef<PurchaseOrder>[] = [
     accessorKey: 'id',
     header: () => h('div', { class: 'text-left' }, 'Id'),
     cell: ({ row }) => {
-      return h(
-        RouterLink,
-        {
-          to: `/purchase_order/${row.original.id}`,
-          class: 'text-left font-medium hover:bg-muted block w-full'
-        },
-        () => row.original.id
-      )
+      return h('div', row.original.id)
     }
   },
   {
@@ -39,25 +32,21 @@ const columns: ColumnDef<PurchaseOrder>[] = [
     accessorKey: 'expected_arrival_date',
     header: () => h('div', { class: 'text-left' }, 'Data de recebimento'),
     cell: ({ row }) => {
-      return h(
-        'div',
-        { to: '', class: 'text-left font-medium' },
-        row.original.expected_arrival_date
-      )
+      return h('div', row.original.expected_arrival_date)
     }
   },
   {
     accessorKey: 'status',
     header: () => h('div', { class: 'text-left' }, 'Status'),
     cell: ({ row }) => {
-      return h('div', { to: '', class: 'text-left font-medium' }, row.original.status)
+      return h('div', row.original.status)
     }
   },
   {
     accessorKey: 'items_quantity',
     header: () => h('div', { class: 'text-left' }, 'Quantidade de Items'),
     cell: ({ row }) => {
-      return h('div', { to: '', class: 'text-left font-medium' }, row.original.items.length)
+      return h('div', row.original.items.length)
     }
   },
   {
@@ -70,8 +59,8 @@ const columns: ColumnDef<PurchaseOrder>[] = [
         'div',
         { class: 'relative' },
         h(PurchaseOrderDropDownMenu, {
-          id: asset.id,
-          onClickDownload: () => purchaseOrderStore.confirm(asset.id)
+          id: asset.id as number,
+          onClickDownload: () => purchaseOrderStore.confirm(asset.id as number)
         })
       )
     }

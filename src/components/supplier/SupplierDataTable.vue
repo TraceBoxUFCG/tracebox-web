@@ -2,7 +2,6 @@
 import CommonDropdownMenu from '@/components/common/CommonDropdownMenu.vue'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { debounce } from 'lodash'
-import { RouterLink } from 'vue-router'
 
 const supplierStore = useSupplierStore()
 
@@ -15,35 +14,28 @@ const columns: ColumnDef<Supplier>[] = [
     accessorKey: 'id',
     header: () => h('div', { class: 'text-left' }, 'Id'),
     cell: ({ row }) => {
-      return h(
-        RouterLink,
-        {
-          to: `/supplliers/${row.original.id}`,
-          class: 'text-left font-medium hover:bg-muted block w-full'
-        },
-        () => row.original.id
-      )
+      return h('div', row.original.id)
     }
   },
   {
     accessorKey: 'name',
     header: () => h('div', { class: 'text-left' }, 'Nome'),
     cell: ({ row }) => {
-      return h('div', { to: '', class: 'text-left font-medium' }, row.original.business_name)
+      return h('div', row.original.business_name)
     }
   },
   {
     accessorKey: 'document',
     header: () => h('div', { class: 'text-left' }, 'Documento'),
     cell: ({ row }) => {
-      return h('div', { to: '', class: 'text-left font-medium' }, row.original.document)
+      return h('div', row.original.document)
     }
   },
   {
     accessorKey: 'city',
     header: () => h('div', { class: 'text-left' }, 'Cidade'),
     cell: ({ row }) => {
-      return h('div', { to: '', class: 'text-left font-medium' }, row.original.address.city)
+      return h('div', row.original.address.city)
     }
   },
   {
