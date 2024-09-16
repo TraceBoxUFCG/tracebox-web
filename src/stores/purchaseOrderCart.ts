@@ -65,3 +65,7 @@ export const usePurchaseOrderCart = defineStore('purchase-order-cart-store', {
     }
   }
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(usePurchaseOrderCart, import.meta.hot))
+}
