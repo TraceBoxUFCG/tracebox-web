@@ -1,6 +1,5 @@
 import type { Product } from './product'
-
-export type Stock = {
+export interface Stock {
   quantity: number
   product: Product
 }
