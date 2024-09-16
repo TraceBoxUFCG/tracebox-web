@@ -88,6 +88,7 @@ declare global {
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
+  const useStockStore: typeof import('./src/stores/stock')['useStockStore']
   const useSupplierStore: typeof import('./src/stores/supplier')['useSupplierStore']
   const vee-useForm: typeof import('vee-validate')['vee-useForm']
   const vee-validate: typeof import('vee-validate')['vee-validate']
@@ -103,8 +104,8 @@ declare global {
   export type { Component, ComponentPublicInstance, ComputedRef, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { Supplier, Address, PaginatedResponse, Product, Packaging, Asset, GenerateAssetTagPayload, ProductVariety, PurchaseOrder, PurchaseOrderItem, PurchaseOrderCart, PurchaseOrderItemCart } from '@/types'
-  import('@/types')
+  export type { Supplier, Address, PaginatedResponse, Product, Packaging, Asset, GenerateAssetTagPayload, ProductVariety, PurchaseOrder, PurchaseOrderItem, PurchaseOrderCart, PurchaseOrderItemCart, Stock } from '@/types/'
+  import('@/types/')
   // @ts-ignore
   export type { AssetStatusEnum } from './src/types/assets'
   import('./src/types/assets')

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { ColumnDef } from '@tanstack/vue-table'
-import { RouterLink } from 'vue-router'
 import CommonDropdownMenu from '@/components/common/CommonDropdownMenu.vue'
 import { debounce } from 'lodash'
+import type { ProductVariety } from '@/types/productVariety'
 
 const props = defineProps<{
   onClickDelete: (object: any) => void
@@ -15,14 +15,7 @@ const columns: ColumnDef<ProductVariety>[] = [
     accessorKey: 'id',
     header: () => h('div', { class: 'text-left' }, 'Id'),
     cell: ({ row }) => {
-      return h(
-        RouterLink,
-        {
-          to: `/catalog/product/variety${row.original.id}`,
-          class: 'text-left font-medium hover:bg-muted block w-full'
-        },
-        () => row.original.id
-      )
+      return h('div', { to: '', class: 'text-left font-medium' }, row.original.id)
     }
   },
   {
@@ -49,7 +42,7 @@ const columns: ColumnDef<ProductVariety>[] = [
         'div',
         { class: 'relative' },
         h(CommonDropdownMenu, {
-          id: product.id,
+          id: product.id as number,
           onClickDelete: () => props.onClickDelete(product)
         })
       )

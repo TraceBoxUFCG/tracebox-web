@@ -31,7 +31,7 @@ export default defineConfig({
           zod: ['z']
         },
         {
-          from: '@/types',
+          from: '@/types/',
           imports: [
             'Supplier',
             'Address',
@@ -44,7 +44,8 @@ export default defineConfig({
             'PurchaseOrder',
             'PurchaseOrderItem',
             'PurchaseOrderCart',
-            'PurchaseOrderItemCart'
+            'PurchaseOrderItemCart',
+            'Stock'
           ],
           type: true
         }

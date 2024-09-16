@@ -2,8 +2,7 @@
 import CommonDropdownMenu from '@/components/common/CommonDropdownMenu.vue'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { debounce } from 'lodash'
-import { RouterLink } from 'vue-router'
-
+import type { Product } from '@/types/product'
 const productStore = useProductStore()
 
 const props = defineProps<{
@@ -15,14 +14,7 @@ const columns: ColumnDef<Product>[] = [
     accessorKey: 'id',
     header: () => h('div', { class: 'text-left' }, 'Id'),
     cell: ({ row }) => {
-      return h(
-        RouterLink,
-        {
-          to: `/product/${row.original.id}`,
-          class: 'text-left font-medium hover:bg-muted block w-full'
-        },
-        () => row.original.id
-      )
+      return h('div', { to: '', class: 'text-left font-medium' }, row.original.id)
     }
   },
   {
@@ -60,7 +52,7 @@ const columns: ColumnDef<Product>[] = [
         'div',
         { class: 'relative' },
         h(CommonDropdownMenu, {
-          id: product.id,
+          id: product.id as number,
           onClickDelete: () => props.onClickDelete(product)
         })
       )
