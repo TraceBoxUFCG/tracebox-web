@@ -44,7 +44,8 @@ export default defineConfig({
             'PurchaseOrder',
             'PurchaseOrderItem',
             'PurchaseOrderCart',
-            'PurchaseOrderItemCart'
+            'PurchaseOrderItemCart',
+            'Stock'
           ],
           type: true
         }

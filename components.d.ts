@@ -173,6 +173,7 @@ declare module 'vue' {
     StepperSeparator: typeof import('./src/components/ui/stepper/StepperSeparator.vue')['default']
     StepperTitle: typeof import('./src/components/ui/stepper/StepperTitle.vue')['default']
     StepperTrigger: typeof import('./src/components/ui/stepper/StepperTrigger.vue')['default']
+    StockDataTable: typeof import('./src/components/stock/StockDataTable.vue')['default']
     SupplierComboBox: typeof import('./src/components/common/inputs/SupplierComboBox.vue')['default']
     SupplierDataTable: typeof import('./src/components/supplier/SupplierDataTable.vue')['default']
     SupplierDialog: typeof import('./src/components/layout/SupplierDialog.vue')['default']
