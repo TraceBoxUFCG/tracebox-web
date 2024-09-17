@@ -15,7 +15,11 @@ const onDelete = (productVariety: ProductVariety) => {
 </script>
 
 <template>
-  <ProductVarietyDataTable @click-delete="onDelete">
+  <ProductVarietyDataTable
+    @click-delete="onDelete"
+    :data="productVarietyStore.productVarities"
+    :pagination="{ total: productVarietyStore.productVarietiesResponse.total }"
+  >
     <FormDialog
       dialog-title="Importação de Variedades"
       dialog-description="Faça o upload do arquivo .csv para upload das variedades. O arquivo deve seguir o seguinte padrão: product_id,name"
