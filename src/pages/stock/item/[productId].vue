@@ -2,7 +2,6 @@
 import type { StockDetails } from '@/types/stock'
 
 const pageStore = usePageStore()
-pageStore.title = ''
 
 const stockStore = useStockStore()
 const details = ref<StockDetails>()
@@ -12,22 +11,30 @@ const params = route.params as { productId: string }
 
 onMounted(async () => {
   details.value = await stockStore.getStockDetails(params.productId)
+  pageStore.title = details.value?.stock.product.name || ''
 })
 </script>
 
 <template>
   <div class="flex w-full flex-row">
-    <AssetDataTable
-      :data="details?.assets || []"
-      :disable-pagination="true"
-      :disable-search-bar="true"
-    >
-    </AssetDataTable>
-    <AssetDataTable
-      :data="details?.assets || []"
-      :disable-pagination="true"
-      :disable-search-bar="true"
-    >
-    </AssetDataTable>
+    <div class="w-full">
+      <h2>Caixas</h2>
+      <AssetDataTable
+        :data="details?.assets || []"
+        :disable-pagination="true"
+        :disable-search-bar="true"
+        :disable-actions="true"
+      >
+      </AssetDataTable>
+    </div>
+    <div class="w-full">
+      <h2>Transações</h2>
+      <TransactionsDataTable
+        :data="details?.transactions || []"
+        :disable-pagination="true"
+        :disable-search-bar="true"
+      >
+      </TransactionsDataTable>
+    </div>
   </div>
 </template>

@@ -203,6 +203,7 @@ declare module 'vue' {
     ToastTitle: typeof import('./src/components/ui/toast/ToastTitle.vue')['default']
     ToastViewport: typeof import('./src/components/ui/toast/ToastViewport.vue')['default']
     TopNavbar: typeof import('./src/components/layout/main/TopNavbar.vue')['default']
+    TransactionsDataTable: typeof import('./src/components/stock/TransactionsDataTable.vue')['default']
     UnitSelect: typeof import('./src/components/common/inputs/UnitSelect.vue')['default']
   }
 }

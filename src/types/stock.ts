@@ -18,7 +18,9 @@ export type TransactionMetaEntry = {
 }
 
 export type TransactionMeta = {
-  entry: TransactionMetaEntry
+  entry: {
+    from: TransactionMetaEntry
+  }
 }
 
 export type Transaction = {
