@@ -8,7 +8,10 @@ purchaseOrderStore.fill()
 </script>
 
 <template>
-  <PurchaseOrderDataTable>
+  <PurchaseOrderDataTable
+    :data="purchaseOrderStore.purchaseOrders"
+    :pagination="{ total: purchaseOrderStore.purchaseOrdersResponse.total }"
+  >
     <Button>
       <RouterLink to="/purchases/new">
         <iconify-icon lass="mr-3 size-4" icon="lucide:plus" />

@@ -20,6 +20,9 @@ export type PurchaseOrderItem = {
   boxes_quantity: number
   unit_price: number
   product_variety: ProductVariety
+  purchase_order: {
+    supplier: Supplier
+  }
 }
 
 export type PurchaseOrderItemCart = {

@@ -9,6 +9,15 @@ import type { PurchaseOrder } from '@/types/purchaseOrder'
 
 const purchaseOrderStore = usePurchaseOrderStore()
 
+defineProps<{
+  data: PurchaseOrder[]
+  pagination?: {
+    total?: number
+    disablePagination?: boolean
+    disableSearchBar?: boolean
+  }
+}>()
+
 const columns: ColumnDef<PurchaseOrder>[] = [
   {
     accessorKey: 'id',
@@ -108,7 +117,10 @@ watch(pageIndex, () => {
     v-model:page-index="pageIndex"
     placeholder="Filtre as ordens por fornecedor"
     :columns="columns"
-    :data="purchaseOrderStore.purchaseOrdersResponse"
+    :data="data"
+    :disable-pagination="pagination?.disablePagination"
+    :disable-search-bar="pagination?.disableSearchBar"
+    :total-item="pagination?.total"
   >
     <template v-slot:search>
       <DatePicker class="w-[200px]" v-model="expectedArrivalDate" />

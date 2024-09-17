@@ -16,7 +16,11 @@ async function onSubmit(product: Product) {
 </script>
 
 <template>
-  <ProductDataTable :onClickDelete="onClickDelete">
+  <ProductDataTable
+    :onClickDelete="onClickDelete"
+    :data="productStore.products"
+    :pagination="{ total: productStore.productsResponse.total }"
+  >
     <FormDialog
       dialog-title="Cadastro de Produtos"
       dialog-description="Preencha os dados para cadastrar e depois aperte o botão de salvar"

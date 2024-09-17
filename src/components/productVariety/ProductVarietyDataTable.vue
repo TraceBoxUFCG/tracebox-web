@@ -6,6 +6,12 @@ import type { ProductVariety } from '@/types/productVariety'
 
 const props = defineProps<{
   onClickDelete: (object: any) => void
+  data: ProductVariety[]
+  pagination?: {
+    total?: number
+    disablePagination?: boolean
+    disableSearchBar?: boolean
+  }
 }>()
 
 const productVarietyStore = useProductVarietyStore()
@@ -76,7 +82,10 @@ watch(pageIndex, () => {
     v-model:page-index="pageIndex"
     placeholder="Filtre as variedades de produto"
     :columns="columns"
-    :data="productVarietyStore.productVarietiesResponse"
+    :data="data"
+    :disable-pagination="pagination?.disablePagination"
+    :disable-search-bar="pagination?.disableSearchBar"
+    :total-item="pagination?.total"
   >
     <template v-slot:action>
       <slot />

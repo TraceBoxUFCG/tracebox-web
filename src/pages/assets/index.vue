@@ -7,7 +7,10 @@ assetStore.fill()
 </script>
 
 <template>
-  <AssetDataTable>
+  <AssetDataTable
+    :data="assetStore.assets"
+    :pagination="{ total: assetStore.assetsResponse.total }"
+  >
     <FormDialog
       dialog-title="Geração de Assets"
       dialog-description="Preencha a quantidade de assets deseja gerar e depois aperte o botão de salvar"
