@@ -8,8 +8,11 @@ import type { Asset } from '@/types/assets'
 const assetStore = useAssetStore()
 defineProps<{
   data: Asset[]
-  disablePagination?: boolean
-  disableSearchBar?: boolean
+  pagination?: {
+    total?: number
+    disablePagination?: boolean
+    disableSearchBar?: boolean
+  }
 }>()
 
 const statusMap: { [key in string]: string } = {
@@ -95,9 +98,9 @@ watch(pageIndex, () => {
     placeholder="Filtre os assets"
     :columns="columns"
     :data="data"
-    :disable-pagination="disablePagination"
-    :disable-search-bar="disableSearchBar"
-    :total-item="assetStore.assetsResponse.total"
+    :disable-pagination="pagination?.disablePagination"
+    :disable-search-bar="pagination?.disableSearchBar"
+    :total-item="pagination?.total"
   >
     <template v-slot:action>
       <slot />

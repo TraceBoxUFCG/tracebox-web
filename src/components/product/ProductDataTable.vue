@@ -7,6 +7,12 @@ const productStore = useProductStore()
 
 const props = defineProps<{
   onClickDelete: (object: any) => void
+  data: Product[]
+  pagination?: {
+    total?: number
+    disablePagination?: boolean
+    disableSearchBar?: boolean
+  }
 }>()
 
 const columns: ColumnDef<Product>[] = [
@@ -86,7 +92,10 @@ watch(pageIndex, () => {
     v-model:page-index="pageIndex"
     placeholder="Filtre os Produtos"
     :columns="columns"
-    :data="productStore.productsResponse"
+    :data="data"
+    :disable-pagination="pagination?.disablePagination"
+    :disable-search-bar="pagination?.disableSearchBar"
+    :total-item="pagination?.total"
   >
     <template v-slot:action>
       <slot />
