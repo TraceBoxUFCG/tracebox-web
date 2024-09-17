@@ -5,16 +5,18 @@ import { get, set } from '@vueuse/core'
 
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
-  data: PaginatedResponse
+  data: TData[]
   placeholder: string
   disableSearchBar?: boolean
+  disablePagination?: boolean
+  totalItem?: number
 }>()
 
 const searchInput = defineModel<string>('searchInput', { required: true })
 const pageIndex = defineModel<number>('pageIndex', { required: true })
 
-const canGoNext = computed(() => props.data.items.length < pageIndex.value)
-const canGoBack = computed(() => props.data.items.length > 1)
+const canGoNext = computed(() => props.data.length < pageIndex.value)
+const canGoBack = computed(() => props.data.length > 1)
 
 const goNext = () => {
   if (get(canGoNext)) {
@@ -51,16 +53,11 @@ const onInputChange = (input: string | number) => {
       <slot name="action" />
     </div>
     <div class="flex w-full flex-col items-center justify-center gap-5">
-      <DataTable
-        class="w-full"
-        v-if="props.data.items"
-        :columns="columns"
-        :data="props.data.items"
-      />
+      <DataTable class="w-full" v-if="props.data" :columns="columns" :data="props.data" />
       <Pagination
         v-slot="{ page }"
-        v-if="props.data.items"
-        :total="props.data.total"
+        v-if="props.data"
+        :total="props.totalItem"
         :sibling-count="1"
         show-edges
         :default-page="1"

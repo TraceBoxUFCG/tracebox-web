@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import router from '@/router'
 import type { StockDetails } from '@/types/stock'
 
 const pageStore = usePageStore()
@@ -13,5 +12,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AssetDataTable> </AssetDataTable>
+  <AssetDataTable
+    :data="details?.assets || []"
+    :disable-pagination="true"
+    :disable-search-bar="true"
+  >
+  </AssetDataTable>
 </template>

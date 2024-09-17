@@ -6,6 +6,11 @@ import AssetDropDownMenu from './AssetDropDownMenu.vue'
 import type { Asset } from '@/types/assets'
 
 const assetStore = useAssetStore()
+defineProps<{
+  data: Asset[]
+  disablePagination?: boolean
+  disableSearchBar?: boolean
+}>()
 
 const statusMap: { [key in string]: string } = {
   [AssetStatusEnum.EMPTY]: 'Vazío',
@@ -89,7 +94,10 @@ watch(pageIndex, () => {
     v-model:page-index="pageIndex"
     placeholder="Filtre os assets"
     :columns="columns"
-    :data="assetStore.assetsResponse"
+    :data="data"
+    :disable-pagination="disablePagination"
+    :disable-search-bar="disableSearchBar"
+    :total-item="assetStore.assetsResponse.total"
   >
     <template v-slot:action>
       <slot />
