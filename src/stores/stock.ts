@@ -24,6 +24,11 @@ export const useStockStore = defineStore('stock-store', {
       ).data
       this.stock = response.items
       this.stockResponse = response
+    },
+    async getStockDetails(productId: string) {
+      const response: StockDetails = (await this.axios.get(`/stock/${productId}/details`)).data
+
+      return response
     }
   }
 })

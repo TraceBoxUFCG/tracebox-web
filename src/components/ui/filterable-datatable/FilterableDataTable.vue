@@ -7,6 +7,7 @@ const props = defineProps<{
   columns: ColumnDef<TData, TValue>[]
   data: PaginatedResponse
   placeholder: string
+  disableSearchBar?: boolean
 }>()
 
 const searchInput = defineModel<string>('searchInput', { required: true })
@@ -39,6 +40,7 @@ const onInputChange = (input: string | number) => {
     <div class="flex items-center justify-between">
       <div class="flex flex-row gap-3">
         <Input
+          v-if="!disableSearchBar"
           v-on:update:model-value="onInputChange"
           :model-value="searchInput"
           class="w-[300px]"
