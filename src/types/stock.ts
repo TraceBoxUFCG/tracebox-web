@@ -1,6 +1,7 @@
 import type { Product } from './product'
 import type { Packaging } from './product'
 import type { Asset } from './assets'
+import type { ReceivementItem } from './receivement_item'
 
 export type Stock = {
   quantity: number
@@ -8,7 +9,12 @@ export type Stock = {
 }
 
 export type TransactionMetaEntry = {
-  from: number
+  receivement_item_id: number
+  asset_id: number
+  id: number
+  receivement_item: ReceivementItem
+  asset: Asset
+  created_at: string
 }
 
 export type TransactionMeta = {
