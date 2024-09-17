@@ -10,7 +10,7 @@ import type { PurchaseOrder } from '@/types/purchaseOrder'
 const purchaseOrderStore = usePurchaseOrderStore()
 
 defineProps<{
-  data: ProductVariety[]
+  data: PurchaseOrder[]
   pagination?: {
     total?: number
     disablePagination?: boolean

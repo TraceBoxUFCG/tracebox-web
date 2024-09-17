@@ -15,7 +15,11 @@ async function onSubmit(supplier: Supplier) {
 </script>
 
 <template>
-  <SupplierDataTable :onClickDelete="onClickDelete">
+  <SupplierDataTable
+    :data="supplierStore.suppliers"
+    :pagination="{ total: supplierStore.suppliersResponse.total }"
+    :onClickDelete="onClickDelete"
+  >
     <FormDialog
       dialog-title="Cadastro de Fornecedores"
       dialog-description="Preencha os dados para cadastrar e depois aperte o botão de salvar"

@@ -7,7 +7,7 @@ import { RouterLink } from 'vue-router'
 const stockStore = useStockStore()
 
 defineProps<{
-  data: ProductVariety[]
+  data: Stock[]
   pagination?: {
     total?: number
     disablePagination?: boolean

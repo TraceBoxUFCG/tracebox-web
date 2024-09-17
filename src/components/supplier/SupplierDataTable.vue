@@ -7,6 +7,12 @@ const supplierStore = useSupplierStore()
 
 const props = defineProps<{
   onClickDelete: (object: any) => void
+  data: Supplier[]
+  pagination?: {
+    total?: number
+    disablePagination?: boolean
+    disableSearchBar?: boolean
+  }
 }>()
 
 const columns: ColumnDef<Supplier>[] = [
@@ -82,7 +88,10 @@ watch(pageIndex, () => {
     v-model:page-index="pageIndex"
     placeholder="Filtre os Fornecedores"
     :columns="columns"
-    :data="supplierStore.suppliersResponse"
+    :data="data"
+    :disable-pagination="pagination?.disablePagination"
+    :disable-search-bar="pagination?.disableSearchBar"
+    :total-item="pagination?.total"
   >
     <template v-slot:action>
       <slot />
