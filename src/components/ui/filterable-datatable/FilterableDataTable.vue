@@ -38,7 +38,7 @@ const onInputChange = (input: string | number) => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-5 px-5">
+  <div class="flex w-full flex-col gap-5 px-5">
     <div class="flex items-center justify-between">
       <div class="flex flex-row gap-3">
         <Input
@@ -56,7 +56,7 @@ const onInputChange = (input: string | number) => {
       <DataTable class="w-full" v-if="props.data" :columns="columns" :data="props.data" />
       <Pagination
         v-slot="{ page }"
-        v-if="props.data"
+        v-if="props.data && !props.disablePagination"
         :total="props.totalItem"
         :sibling-count="1"
         show-edges
