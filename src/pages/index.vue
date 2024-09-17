@@ -1,11 +1,14 @@
 <script setup lang="ts">
 const pageStore = usePageStore()
 pageStore.title = 'Estoque'
-const { fill } = useStockStore()
+const stockStore = useStockStore()
 
-fill()
+stockStore.fill()
 </script>
 
 <template>
-  <StockDataTable />
+  <StockDataTable
+    :data="stockStore.stock"
+    :pagination="{ total: stockStore.stockResponse.total }"
+  />
 </template>

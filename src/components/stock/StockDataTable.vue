@@ -6,6 +6,15 @@ import { RouterLink } from 'vue-router'
 
 const stockStore = useStockStore()
 
+defineProps<{
+  data: ProductVariety[]
+  pagination?: {
+    total?: number
+    disablePagination?: boolean
+    disableSearchBar?: boolean
+  }
+}>()
+
 const columns: ColumnDef<Stock>[] = [
   {
     accessorKey: 'id',
@@ -67,7 +76,10 @@ watch(pageIndex, () => {
     v-model:page-index="pageIndex"
     placeholder="Filtre os produtos em estoque"
     :columns="columns"
-    :data="stockStore.stockResponse"
+    :data="data"
+    :disable-pagination="pagination?.disablePagination"
+    :disable-search-bar="pagination?.disableSearchBar"
+    :total-item="pagination?.total"
   >
   </FilterableDataTable>
 </template>
